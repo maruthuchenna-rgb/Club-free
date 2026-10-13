@@ -1,0 +1,65 @@
+/* ============================================================
+   SCROLL ANIMATIONS CSS — Down-to-Up + variants
+   Pure CSS Intersection Observer approach. No GSAP.
+   ============================================================ */
+
+/* ---------- Base hidden state (down → up) ---------- */
+.sa {
+  opacity: 0;
+  transform: translateY(70px);
+  transition: opacity 0.75s cubic-bezier(0.22, 1, 0.36, 1),
+              transform 0.75s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: opacity, transform;
+}
+
+/* Slide from left */
+.sa-left {
+  opacity: 0;
+  transform: translateX(-80px);
+  transition: opacity 0.75s cubic-bezier(0.22, 1, 0.36, 1),
+              transform 0.75s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Slide from right */
+.sa-right {
+  opacity: 0;
+  transform: translateX(80px);
+  transition: opacity 0.75s cubic-bezier(0.22, 1, 0.36, 1),
+              transform 0.75s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Zoom + up */
+.sa-zoom {
+  opacity: 0;
+  transform: scale(0.88) translateY(40px);
+  transition: opacity 0.75s cubic-bezier(0.22, 1, 0.36, 1),
+              transform 0.75s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* ---------- Visible/animated-in state ---------- */
+.sa.is-visible,
+.sa-left.is-visible,
+.sa-right.is-visible,
+.sa-zoom.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* ---------- Stagger delay helpers ---------- */
+.sa-d1 { transition-delay: 0.08s; }
+.sa-d2 { transition-delay: 0.16s; }
+.sa-d3 { transition-delay: 0.24s; }
+.sa-d4 { transition-delay: 0.32s; }
+.sa-d5 { transition-delay: 0.40s; }
+.sa-d6 { transition-delay: 0.48s; }
+.sa-d7 { transition-delay: 0.56s; }
+.sa-d8 { transition-delay: 0.64s; }
+
+/* ---------- Respect reduced-motion ---------- */
+@media (prefers-reduced-motion: reduce) {
+  .sa, .sa-left, .sa-right, .sa-zoom {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+}

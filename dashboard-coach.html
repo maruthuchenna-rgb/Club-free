@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Coach Dashboard | Stackly</title>
+  <link rel="icon" type="image/webp" href="asset/image/stackly_.webp">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --forest: #0f2518;
+      --forest-mid: #18332b;
+      --lime: #bbf779;
+      --lime-dark: #7ec832;
+      --dark: #0a1a08;
+      --white: #ffffff;
+      --gray: #9ca3af;
+      --light-bg: #f5f6f2;
+      --border: #e5e7eb;
+    }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--light-bg);
+      display: flex;
+      height: 100vh;
+      overflow: hidden;
+    }
+    /* Sidebar */
+    .sidebar {
+      width: 280px;
+      background: var(--forest);
+      color: var(--white);
+      display: flex;
+      flex-direction: column;
+      flex-shrink: 0;
+    }
+    .sidebar-header {
+      padding: 24px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+       filter: brightness(0) saturate(100%)
+            invert(87%) sepia(29%) saturate(1000%)
+            hue-rotate(42deg) brightness(105%) contrast(95%);
+    }
+    .sidebar-header img {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      border: 2px solid var(--lime);
+      background: #fff;
+    }
+    .sidebar-header h2 {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 24px;
+      font-weight: 800;
+      letter-spacing: 1px;
+    }
+    .sidebar-header h2 span { color: var(--lime); }
+    
+    .user-profile {
+      padding: 20px 24px;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .user-avatar {
+      width: 46px;
+      height: 46px;
+      background: var(--lime);
+      color: var(--forest);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      font-weight: 600;
+    }
+    .user-info {
+      overflow: hidden;
+    }
+    .user-name {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 18px;
+      font-weight: 700;
+      color: #fff;
+      text-transform: uppercase;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .user-email {
+      font-size: 12px;
+      color: #c8d8c8;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .user-role-badge {
+      display: inline-block;
+      background: rgba(187, 247, 121, 0.2);
+      color: var(--lime);
+      font-size: 10px;
+      padding: 2px 6px;
+      border-radius: 4px;
+      text-transform: uppercase;
+      font-weight: 600;
+      margin-top: 4px;
+    }
+
+    .nav-menu {
+      padding: 20px 0;
+      flex: 1;
+    }
+    .nav-item {
+      padding: 14px 24px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      color: #c8d8c8;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      font-weight: 500;
+    }
+    .nav-item:hover {
+      background: rgba(255,255,255,0.05);
+      color: #fff;
+    }
+    .nav-item.active {
+      background: var(--lime);
+      color: var(--forest);
+      font-weight: 600;
+      border-left: 4px solid var(--forest-mid);
+    }
+    .nav-item i { width: 20px; text-align: center; font-size: 18px; }
+    
+    .sidebar-footer {
+      padding: 20px 24px;
+      border-top: 1px solid rgba(255,255,255,0.1);
+    }
+    .logout-btn {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: #ff6b6b;
+      text-decoration: none;
+      font-weight: 600;
+      transition: color 0.2s;
+    }
+    .logout-btn:hover { color: #ff8787; }
+
+    /* Main Content */
+    .main-content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+    .topbar {
+      height: 70px;
+      background: var(--white);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      padding: 0 30px;
+      justify-content: space-between;
+    }
+    .page-title {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--forest);
+      text-transform: uppercase;
+    }
+    
+    .content-area {
+      flex: 1;
+      padding: 30px;
+      overflow-y: auto;
+    }
+    
+    /* Sections */
+    .dashboard-section {
+      display: none;
+      animation: fadeIn 0.3s ease;
+    }
+    .dashboard-section.active { display: block; }
+    
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Cards & Layout */
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 24px; }
+    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-bottom: 24px; }
+    
+    .card {
+      background: var(--white);
+      border-radius: 12px;
+      padding: 24px;
+      border: 1px solid var(--border);
+      box-shadow: 0 2px 10px rgba(0,0,0,0.02);
+    }
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+    }
+    .card-title {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--forest);
+      text-transform: uppercase;
+    }
+    
+    /* Stats */
+    .stat-value {
+      font-size: 32px;
+      font-weight: 700;
+      color: var(--forest);
+      margin-bottom: 4px;
+    }
+    .stat-label { font-size: 13px; color: var(--gray); font-weight: 500; }
+    
+    /* Image Box */
+    .image-box {
+      width: 100%;
+      height: 200px;
+      border-radius: 8px;
+      overflow: hidden;
+      margin-bottom: 16px;
+    }
+    .image-box img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .mobile-menu-btn { display: none; }
+    .sidebar-overlay { display: none; }
+    @media (max-width: 900px) {
+      body { 
+        flex-direction: column !important; 
+        height: auto !important; 
+        min-height: 100vh !important;
+        overflow-x: hidden;
+        overflow-y: auto !important;
+      }
+      .mobile-menu-btn { display: block !important; }
+      .sidebar { 
+        position: fixed !important;
+        left: -100% !important;
+        top: 0;
+        bottom: 0;
+        width: 280px !important;
+        height: 100vh !important;
+        z-index: 1000;
+        transition: left 0.3s ease;
+      }
+      .sidebar.open { left: 0 !important; }
+      .sidebar-overlay.active {
+        display: block;
+        position: fixed;
+        top: 0; left: 0; right: 0; bottom: 0;
+        background: rgba(0,0,0,0.5);
+        z-index: 999;
+      }
+      .main-content { 
+        padding: 15px !important; 
+        overflow: visible !important; 
+        width: 100% !important;
+      }
+      .grid-2, .grid-3 { 
+        grid-template-columns: 1fr !important; 
+        gap: 15px !important;
+      }
+      .sidebar-header img { width: 80px !important; }
+      div[style*="display:flex;"] { flex-wrap: wrap !important; }
+      section#messages > div > div { flex-direction: column !important; }
+      section#messages > div > div > div[style*="width:30%"], 
+      section#messages > div > div > div[style*="width:70%"] { 
+        width: 100% !important; 
+        border-right: none !important; 
+        padding: 10px !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+  <aside class="sidebar">
+    <a href="index.html" class="sidebar-header" style="justify-content: center; padding: 24px 0;">
+      <img src="asset/image/stackly_.webp" alt="Logo" style="width: 120px; height: auto; border: none; background: transparent; border-radius: 0;">
+    </a>
+    
+    <div class="user-profile">
+      <div class="user-avatar" id="userInitial">C</div>
+      <div class="user-info">
+        <div class="user-name" id="userName">Coach Name</div>
+        <div class="user-email" id="userEmail">coach@example.com</div>
+        <div class="user-role-badge">Head Coach</div>
+      </div>
+    </div>
+
+    <nav class="nav-menu">
+      <div class="nav-item active" data-target="team">
+        <i class="fas fa-users"></i> Team Overview
+      </div>
+      <div class="nav-item" data-target="roster">
+        <i class="fas fa-clipboard-list"></i> Roster
+      </div>
+      <div class="nav-item" data-target="sessions">
+        <i class="fas fa-calendar-check"></i> Training Sessions
+      </div>
+      <div class="nav-item" data-target="messages">
+        <i class="fas fa-envelope"></i> Messages
+      </div>
+      <div class="nav-item" data-target="settings">
+        <i class="fas fa-cog"></i> Settings
+      </div>
+    </nav>
+    
+    <div class="sidebar-footer">
+      <a href="login.html" class="logout-btn" onclick="localStorage.removeItem('stacklyUser')">
+        <i class="fas fa-sign-out-alt"></i> Logout
+      </a>
+    </div>
+  </aside>
+
+  <main class="main-content">
+    <header class="topbar">
+      <div style="display:flex; align-items:center; gap: 15px;">
+        <button id="mobileMenuBtn" class="mobile-menu-btn" style="background:none; border:none; font-size:24px; color:var(--forest); cursor:pointer;">
+          <i class="fas fa-bars"></i>
+        </button>
+        <div class="page-title" id="pageTitle">Team Overview</div>
+      </div>
+    </header>
+    
+    <div class="content-area">
+      <!-- 1. Team Overview -->
+      <section id="team" class="dashboard-section active">
+        <div class="grid-3">
+          <div class="card" style="border-left: 4px solid var(--lime-dark);">
+            <div class="stat-value">24</div>
+            <div class="stat-label">Active Athletes</div>
+            <div style="margin-top:10px; font-size:12px; color:var(--gray);">Across 2 squads</div>
+          </div>
+          <div class="card" style="border-left: 4px solid #3b82f6;">
+            <div class="stat-value">3</div>
+            <div class="stat-label">Upcoming Matches</div>
+            <div style="margin-top:10px; font-size:12px; color:var(--gray);">Next match in 2 days</div>
+          </div>
+          <div class="card" style="border-left: 4px solid var(--forest);">
+            <div class="stat-value">92%</div>
+            <div class="stat-label">Attendance Rate</div>
+            <div style="background:var(--light-bg); height:6px; border-radius:3px; margin-top:10px;">
+               <div style="background:var(--forest); width:92%; height:100%; border-radius:3px;"></div>
+            </div>
+          </div>
+        </div>
+        <div class="grid-2">
+          <div class="card">
+            <div class="card-header"><h3 class="card-title">Recent Training</h3></div>
+            <div class="image-box">
+              <img src="asset/image/team-soccer-1.webp" alt="Soccer Team">
+            </div>
+            <p style="margin-bottom:15px;">Focus was on defensive formations and quick counters.</p>
+            <a href="404.html"><button style="padding: 8px 16px; background: var(--forest); color: var(--white); border: none; border-radius: 4px; cursor: pointer; font-family:'Inter';"><i class="fas fa-file-alt"></i> View Training Report</button></a>
+          </div>
+          <div class="card">
+            <div class="card-header"><h3 class="card-title">Pending Action Items</h3></div>
+            <div style="display:flex; flex-direction:column; gap:10px;">
+              <div style="padding:15px; border-left:4px solid #ef4444; background:#f9fafb; border-radius:4px;">
+                <strong style="display:block; margin-bottom:5px;">Review New Applicants</strong>
+                <span style="font-size:13px; color:var(--gray);">5 new athletes applied for summer camp.</span>
+              </div>
+              <div style="padding:15px; border-left:4px solid #f59e0b; background:#f9fafb; border-radius:4px;">
+                <strong style="display:block; margin-bottom:5px;">Submit Medical Clearance</strong>
+                <span style="font-size:13px; color:var(--gray);">Due for 3 varsity players before Friday.</span>
+              </div>
+              <div style="padding:15px; border-left:4px solid var(--lime-dark); background:#f9fafb; border-radius:4px;">
+                <strong style="display:block; margin-bottom:5px;">Finalize Starting Lineup</strong>
+                <span style="font-size:13px; color:var(--gray);">For the upcoming regional match.</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="grid-2">
+          <div class="card">
+            <div class="card-header"><h3 class="card-title">Top Performers This Week</h3></div>
+            <ul style="list-style:none; display:flex; flex-direction:column; gap:10px;">
+              <li style="padding:10px; background:#f9fafb; border-radius:6px; display:flex; justify-content:space-between; align-items:center;">
+                <div style="display:flex; align-items:center; gap:10px;">
+                  <div style="width:30px; height:30px; background:gold; color:var(--forest); border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:bold; font-size:12px;">1</div>
+                  <strong>Marcus Johnson</strong>
+                </div>
+                <span style="color:var(--gray); font-size:12px;">5 Goals</span>
+              </li>
+              <li style="padding:10px; background:#f9fafb; border-radius:6px; display:flex; justify-content:space-between; align-items:center;">
+                <div style="display:flex; align-items:center; gap:10px;">
+                  <div style="width:30px; height:30px; background:silver; color:var(--forest); border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:bold; font-size:12px;">2</div>
+                  <strong>Ethan Smith</strong>
+                </div>
+                <span style="color:var(--gray); font-size:12px;">12 Assists</span>
+              </li>
+              <li style="padding:10px; background:#f9fafb; border-radius:6px; display:flex; justify-content:space-between; align-items:center;">
+                <div style="display:flex; align-items:center; gap:10px;">
+                  <div style="width:30px; height:30px; background:#cd7f32; color:var(--forest); border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:bold; font-size:12px;">3</div>
+                  <strong>Liam Davis</strong>
+                </div>
+                <span style="color:var(--gray); font-size:12px;">9 Interceptions</span>
+              </li>
+            </ul>
+          </div>
+          <div class="card">
+            <div class="card-header"><h3 class="card-title">Match Report Summaries</h3></div>
+            <div style="display:flex; flex-direction:column; gap:15px; margin-top:10px;">
+              <div style="display:flex; flex-direction:column; padding-bottom:10px; border-bottom:1px solid var(--border);">
+                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:5px;">
+                  <strong style="color:var(--forest);">vs Eagles (Home)</strong>
+                  <span style="background:#dcfce7; color:#166534; padding:2px 8px; border-radius:12px; font-size:11px; font-weight:bold;">WIN 3-1</span>
+                </div>
+                <span style="font-size:13px; color:var(--gray);">Dominant second half. Midfield control was exceptional.</span>
+              </div>
+              <div style="display:flex; flex-direction:column; padding-bottom:10px;">
+                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:5px;">
+                  <strong style="color:var(--forest);">vs Tigers (Away)</strong>
+                  <span style="background:#fef08a; color:#854d0e; padding:2px 8px; border-radius:12px; font-size:11px; font-weight:bold;">DRAW 2-2</span>
+                </div>
+                <span style="font-size:13px; color:var(--gray);">Conceded late. Defensive spacing needs work on set pieces.</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 2. Roster -->
+      <section id="roster" class="dashboard-section">
+        <div class="card">
+          <div class="card-header">
+            <h3 class="card-title">Team Roster</h3>
+           <a href="404.html"><button style="padding: 6px 12px; background: var(--lime); color: var(--forest); border: none; border-radius: 4px; font-weight:bold; cursor: pointer;"><i class="fas fa-plus"></i> Add Athlete</button></a>
+          </div>
+          
+          <table style="width: 100%; border-collapse: collapse; margin-top: 15px; text-align: left;">
+            <thead>
+              <tr style="border-bottom: 2px solid var(--border); color: var(--gray); font-size: 13px; text-transform: uppercase;">
+                <th style="padding: 12px 10px;">Player</th>
+                <th style="padding: 12px 10px;">Position</th>
+                <th style="padding: 12px 10px;">Status</th>
+                <th style="padding: 12px 10px;">Fitness</th>
+                <th style="padding: 12px 10px;">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr style="border-bottom: 1px solid var(--border);">
+                <td style="padding: 12px 10px; font-weight:600;">Marcus Johnson</td>
+                <td style="padding: 12px 10px; color:var(--gray);">Forward</td>
+                <td style="padding: 12px 10px;"><span style="background:#dcfce7; color:#166534; padding:4px 8px; border-radius:12px; font-size:12px; font-weight:600;">Active</span></td>
+                <td style="padding: 12px 10px;">95%</td>
+                <td style="padding: 12px 10px;"><i class="fas fa-ellipsis-v" style="cursor:pointer; color:var(--gray);"></i></td>
+              </tr>
+              <tr style="border-bottom: 1px solid var(--border);">
+                <td style="padding: 12px 10px; font-weight:600;">Tyler Davis</td>
+                <td style="padding: 12px 10px; color:var(--gray);">Midfielder</td>
+                <td style="padding: 12px 10px;"><span style="background:#fee2e2; color:#991b1b; padding:4px 8px; border-radius:12px; font-size:12px; font-weight:600;">Injured</span></td>
+                <td style="padding: 12px 10px;">40%</td>
+                <td style="padding: 12px 10px;"><i class="fas fa-ellipsis-v" style="cursor:pointer; color:var(--gray);"></i></td>
+              </tr>
+              <tr style="border-bottom: 1px solid var(--border);">
+                <td style="padding: 12px 10px; font-weight:600;">Ethan Smith</td>
+                <td style="padding: 12px 10px; color:var(--gray);">Defender</td>
+                <td style="padding: 12px 10px;"><span style="background:#dcfce7; color:#166534; padding:4px 8px; border-radius:12px; font-size:12px; font-weight:600;">Active</span></td>
+                <td style="padding: 12px 10px;">88%</td>
+                <td style="padding: 12px 10px;"><i class="fas fa-ellipsis-v" style="cursor:pointer; color:var(--gray);"></i></td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="image-box" style="height: 200px; margin-top: 30px;">
+            <img src="asset/image/polaroid-team-cheer.webp" alt="Team Cheer">
+          </div>
+        </div>
+      </section>
+
+      <!-- 3. Sessions -->
+      <section id="sessions" class="dashboard-section">
+        <div class="grid-2">
+          <div class="card">
+            <div class="card-header"><h3 class="card-title">Upcoming Schedule</h3></div>
+            <ul style="list-style:none; padding:0; margin:0;">
+              <li style="padding:15px 0; border-bottom:1px solid var(--border); display:flex; gap:15px;">
+                <div style="font-weight:bold; color:var(--forest); min-width:80px;">Fri 4:00 PM</div>
+                <div>
+                  <div style="font-weight:600;">Tactical Drills</div>
+                  <div style="font-size:13px; color:var(--gray);">Field House Court 1</div>
+                </div>
+              </li>
+              <li style="padding:15px 0; border-bottom:1px solid var(--border); display:flex; gap:15px;">
+                <div style="font-weight:bold; color:var(--forest); min-width:80px;">Sat 9:00 AM</div>
+                <div>
+                  <div style="font-weight:600;">Conditioning</div>
+                  <div style="font-size:13px; color:var(--gray);">Outdoor Track</div>
+                </div>
+              </li>
+              <li style="padding:15px 0; display:flex; gap:15px;">
+                <div style="font-weight:bold; color:var(--forest); min-width:80px;">Sun 2:00 PM</div>
+                <div>
+                  <div style="font-weight:600;">Match vs. Eagles</div>
+                  <div style="font-size:13px; color:var(--gray);">Main Stadium</div>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div class="card">
+            <div class="image-box" style="height: 100%;">
+              <img src="asset/image/shop-fieldhouse-1.webp" alt="Field House">
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+
+      <!-- 6. Messages -->
+      <section id="messages" class="dashboard-section">
+        <div class="card" style="padding:0; overflow:hidden;">
+          <div class="card-header" style="padding:20px; border-bottom:1px solid var(--border); margin-bottom:0;"><h3 class="card-title">Team Comms</h3></div>
+          <div style="display:flex;">
+            <div style="width:30%; border-right:1px solid var(--border);">
+              <div style="padding:15px; border-bottom:1px solid var(--border); background:#f9fafb; cursor:pointer;">
+                <strong style="display:block;">Varsity Squad</strong>
+                <span style="font-size:12px; color:var(--gray);">Ethan: I'll be 10 mins late...</span>
+              </div>
+              <div style="padding:15px; border-bottom:1px solid var(--border); cursor:pointer;">
+                <strong style="display:block;">Parent - John D.</strong>
+                <span style="font-size:12px; color:var(--gray);">Question about tournament fees</span>
+              </div>
+            </div>
+            <div style="width:70%; padding:20px;">
+              <h4 style="margin-bottom:10px;">Varsity Squad Group Chat</h4>
+              <p style="font-size:14px; color:var(--gray); margin-bottom:20px;">24 Members</p>
+              
+              <div style="display:flex; flex-direction:column; gap:15px; margin-bottom:20px;">
+                <div style="align-self:flex-end; background:var(--forest); color:var(--lime); padding:10px 15px; border-radius:15px 15px 0 15px; max-width:70%;">
+                  Don't forget to pack your away jerseys for tomorrow!
+                  <div style="font-size:10px; color:rgba(255,255,255,0.7); text-align:right; margin-top:5px;">You - 4:00 PM</div>
+                </div>
+                <div style="align-self:flex-start; background:var(--light-bg); color:var(--dark); padding:10px 15px; border-radius:15px 15px 15px 0; max-width:70%;">
+                  Got it coach. I'll be about 10 mins late due to traffic.
+                  <div style="font-size:10px; color:var(--gray); margin-top:5px;">Ethan S. - 4:15 PM</div>
+                </div>
+              </div>
+
+              <div style="margin-top:20px; display:flex; gap:10px;">
+                <input type="text" placeholder="Type a message to the squad..." style="flex:1; padding:10px; border:1px solid var(--border); border-radius:4px;">
+                <button style="padding:10px 20px; background:var(--forest); color:var(--lime); border:none; border-radius:4px; cursor:pointer;"><i class="fas fa-paper-plane"></i></button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+      <!-- 5. Settings -->
+      <section id="settings" class="dashboard-section">
+        <div class="card">
+          <div class="card-header"><h3 class="card-title">Coach Profile</h3></div>
+          <form style="display:flex; flex-direction:column; gap:15px; max-width:500px;">
+            <div>
+              <label style="display:block; font-size:12px; font-weight:600; margin-bottom:5px; text-transform:uppercase;">Name</label>
+              <input type="text" value="Coach Name" style="width:100%; padding:10px; border:1px solid var(--border); border-radius:4px; font-family:'Inter';">
+            </div>
+            <div>
+              <label style="display:block; font-size:12px; font-weight:600; margin-bottom:5px; text-transform:uppercase;">Email</label>
+              <input type="email" value="coach@example.com" style="width:100%; padding:10px; border:1px solid var(--border); border-radius:4px; font-family:'Inter';">
+            </div>
+            <div>
+              <label style="display:block; font-size:12px; font-weight:600; margin-bottom:5px; text-transform:uppercase;">Specialization</label>
+              <select style="width:100%; padding:10px; border:1px solid var(--border); border-radius:4px; font-family:'Inter';">
+                <option>Head Coach</option>
+                <option>Assistant Coach</option>
+                <option>Fitness Trainer</option>
+              </select>
+            </div>
+           <a href="404.html"> <button type="button" style="padding:12px; background:var(--forest); color:var(--lime); border:none; border-radius:4px; font-weight:bold; cursor:pointer;">Update Profile</button></a>
+          </form>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <script>
+    // Load User Data
+    const userData = JSON.parse(localStorage.getItem('stacklyUser'));
+    if (userData) {
+      document.getElementById('userName').textContent = userData.name;
+      document.getElementById('userEmail').textContent = userData.email;
+      document.getElementById('userInitial').textContent = userData.name.charAt(0).toUpperCase();
+    } else {
+      // Fallback
+      document.getElementById('userName').textContent = "Guest Coach";
+      document.getElementById('userEmail').textContent = "coach@example.com";
+    }
+
+    // Tab Switching
+    const navItems = document.querySelectorAll('.nav-item');
+    const sections = document.querySelectorAll('.dashboard-section');
+    const pageTitle = document.getElementById('pageTitle');
+
+    navItems.forEach(item => {
+      item.addEventListener('click', () => {
+        // Remove active class
+        navItems.forEach(n => n.classList.remove('active'));
+        sections.forEach(s => s.classList.remove('active'));
+        
+        // Add active class
+        item.classList.add('active');
+        const targetId = item.getAttribute('data-target');
+        document.getElementById(targetId).classList.add('active');
+        
+        // Update Title
+        pageTitle.textContent = item.textContent.trim();
+
+        // Close sidebar on mobile after clicking a link
+        if (window.innerWidth <= 900) {
+          document.querySelector('.sidebar').classList.remove('open');
+          document.getElementById('sidebarOverlay').classList.remove('active');
+        }
+      });
+    });
+
+    // Mobile Menu Toggle
+    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+    const sidebar = document.querySelector('.sidebar');
+    const sidebarOverlay = document.getElementById('sidebarOverlay');
+
+    mobileMenuBtn.addEventListener('click', () => {
+      sidebar.classList.add('open');
+      sidebarOverlay.classList.add('active');
+    });
+
+    sidebarOverlay.addEventListener('click', () => {
+      sidebar.classList.remove('open');
+      sidebarOverlay.classList.remove('active');
+    });
+  </script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  var go404 = function(e) { e.preventDefault(); window.location.href = '404.html'; };
+
+  // CTA button classes to intercept
+  var ctaBtnClasses = [
+    'btn-all-testimonials','btn-about-explore','btn-proud-enrol',
+    'btn-blog-member','btn-blog-benefits','btn-schedules',
+    'btn-learn-more','btn-cta','btn-join-member','btn-join-benefits',
+    'btn-join','btn-register','btn-book','btn-view','btn-enroll',
+    'btn-get-started','btn-try','btn-explore','btn-play','btn-watch',
+    'card-btn','hero-btn','program-btn','sport-btn','btn-clay-directions'
+  ];
+  ctaBtnClasses.forEach(function(cls) {
+    document.querySelectorAll('.' + cls).forEach(function(el) {
+      el.addEventListener('click', go404);
+    });
+  });
+
+  // <a> tags pointing to services.html or 404.html-redirects (catch any remaining)
+  document.querySelectorAll('a[href="services.html"]').forEach(function(a) {
+    a.href = '404.html';
+  });
+
+  // Any button without onclick/type=submit whose text matches CTA keywords
+  var keywords = ['LEARN MORE','JOIN NOW','GET STARTED','ALL TESTIMONIALS',
+    'EXPLORE','REGISTER','BOOK NOW','VIEW MORE','ENROLL','BECOME A MEMBER',
+    'MEMBERS BENEFITS','SCHEDULES','VIEW DETAILS','BUY NOW','ADD TO CART',
+    'SHOP NOW','DISCOVER','READ MORE','SEE MORE','VIEW ALL','ALL REVIEWS',
+    'ALL PROGRAMS','VIEW PROGRAM','GET TICKETS','APPLY NOW'];
+
+  document.querySelectorAll('button, a.btn, a[class*="btn-"]').forEach(function(el) {
+    var skipClasses = ['toggle-password','modal-close-btn','menu-toggle',
+      'nav-icon-btn','tilted-nav-btn','btn-auth','social-btn',
+      'btn-submit-contact','logout-btn','nav-link','btn-enquiry','btn-proud-enrol'];
+    var isSkip = skipClasses.some(function(s){ return el.classList.contains(s); });
+    var hasRealHref = el.tagName === 'A' && el.href &&
+      !el.href.endsWith('#') && !el.href.includes('services.html') &&
+      el.href.includes('.html') && !el.href.includes('404.html');
+    if (!isSkip && !hasRealHref) {
+      var txt = el.textContent.trim().toUpperCase();
+      if (keywords.some(function(k){ return txt.indexOf(k) !== -1; })) {
+        el.addEventListener('click', go404);
+      }
+    }
+  });
+});
+</script>
+</body>
+</html>

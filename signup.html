@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign Up | Stackly Sports Club</title>
+  <link rel="icon" type="image/webp" href="asset/image/stackly_.webp">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --forest:   #0f2518;
+      --forest-mid: #18332b;
+      --lime:     #bbf779;
+      --lime-dark:#7ec832;
+      --dark:     #0a1a08;
+      --white:    #ffffff;
+      --gray:     #9ca3af;
+      --light-bg: #f5f6f2;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      min-height: 100vh;
+      display: flex;
+    }
+
+    /* ── LEFT PANEL ─────────────────────────────────────── */
+    .auth-image-panel {
+      flex: 1;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+    }
+
+    .auth-image-panel img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+    }
+
+    .auth-image-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(10,26,8,0.92) 30%, rgba(10,26,8,0.35) 100%);
+      z-index: 1;
+    }
+
+    .auth-image-content {
+      position: relative;
+      z-index: 2;
+      padding: 48px;
+    }
+
+    .auth-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      margin-bottom: auto;
+      position: absolute;
+      top: 40px;
+      left: 48px;
+      z-index: 10;
+    }
+
+    .auth-logo img {
+      position: static;
+      width: 46px;
+      height: 46px;
+      object-fit: contain;
+      border-radius: 50%;
+      border: 2px solid var(--lime);
+      background: #fff;
+      padding: 2px;
+    }
+
+    .auth-logo-text {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 22px;
+      font-weight: 800;
+      color: #fff;
+      letter-spacing: 2px;
+    }
+
+    .auth-logo-text span { color: var(--lime); }
+
+    .auth-tagline h2 {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 42px;
+      font-weight: 800;
+      text-transform: uppercase;
+      color: #fff;
+      line-height: 1.15;
+      margin-bottom: 14px;
+    }
+
+    .auth-tagline h2 span { color: var(--lime); }
+
+    .auth-tagline p {
+      font-size: 14px;
+      color: #c8d8c8;
+      line-height: 1.7;
+      max-width: 340px;
+    }
+
+    /* ── RIGHT PANEL ─────────────────────────────────────── */
+    .auth-form-panel {
+      width: 480px;
+      min-width: 380px;
+      background: var(--white);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 60px 48px;
+      overflow-y: auto;
+    }
+
+    .auth-form-header {
+      margin-bottom: 36px;
+    }
+
+    .auth-form-header h1 {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 34px;
+      font-weight: 800;
+      text-transform: uppercase;
+      color: var(--dark);
+      margin-bottom: 8px;
+    }
+
+    .auth-form-header p {
+      font-size: 14px;
+      color: var(--gray);
+    }
+
+    .auth-form-header p a {
+      color: var(--lime-dark);
+      font-weight: 600;
+      text-decoration: none;
+    }
+
+    .auth-form-header p a:hover { text-decoration: underline; }
+
+    /* Social Buttons */
+    .social-btns {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 28px;
+    }
+
+    .social-btn {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 11px;
+      border: 1.5px solid #e5e7eb;
+      border-radius: 6px;
+      font-size: 13px;
+      font-weight: 600;
+      color: #374151;
+      cursor: pointer;
+      background: #fff;
+      transition: all 0.2s ease;
+    }
+
+    .social-btn:hover {
+      background: var(--light-bg);
+      border-color: #d1d5db;
+    }
+
+    .social-btn i { font-size: 16px; }
+    .social-btn .fa-google { color: #ea4335; }
+    .social-btn .fa-facebook-f { color: #1877f2; }
+
+    .divider {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+
+    .divider::before,
+    .divider::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: #e5e7eb;
+    }
+
+    .divider span {
+      font-size: 12px;
+      color: var(--gray);
+      white-space: nowrap;
+    }
+
+    /* Form Fields */
+    .role-selector {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+    
+    .role-option {
+      flex: 1;
+      position: relative;
+    }
+
+    .role-option input[type="radio"] {
+      display: none;
+    }
+
+    .role-option label {
+      display: flex !important;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 12px;
+      border: 1.5px solid #e5e7eb;
+      border-radius: 6px;
+      font-size: 14px !important;
+      font-weight: 600 !important;
+      color: #374151 !important;
+      cursor: pointer;
+      background: #fafafa;
+      transition: all 0.2s ease;
+      font-family: 'Inter', sans-serif !important;
+      text-transform: none !important;
+      letter-spacing: normal !important;
+      margin-bottom: 0 !important;
+    }
+
+    .role-option input[type="radio"]:checked + label {
+      border-color: var(--lime-dark);
+      background: #f4fce3;
+      color: var(--forest) !important;
+    }
+
+    .form-group {
+      margin-bottom: 18px;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 13px;
+      font-weight: 600;
+      color: #374151;
+      margin-bottom: 7px;
+      font-family: 'Rajdhani', sans-serif;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+    }
+
+    .input-wrap {
+      position: relative;
+    }
+
+    .input-wrap i {
+      position: absolute;
+      left: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #9ca3af;
+      font-size: 14px;
+    }
+
+    .form-group input {
+      width: 100%;
+      padding: 12px 14px 12px 40px;
+      border: 1.5px solid #e5e7eb;
+      border-radius: 6px;
+      font-size: 14px;
+      color: #111;
+      background: #fafafa;
+      transition: all 0.2s ease;
+      outline: none;
+      font-family: 'Inter', sans-serif;
+    }
+
+    .form-group input:focus {
+      border-color: var(--lime-dark);
+      background: #fff;
+      box-shadow: 0 0 0 3px rgba(126,200,50,0.15);
+    }
+
+    .toggle-password {
+      position: absolute;
+      right: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      cursor: pointer;
+      color: #9ca3af;
+      font-size: 14px;
+      background: none;
+      border: none;
+    }
+
+    .toggle-password:hover { color: #374151; }
+
+    .form-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 24px;
+      margin-top: -4px;
+    }
+
+    .remember-wrap {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+    }
+
+    .remember-wrap input[type="checkbox"] {
+      accent-color: var(--lime-dark);
+      width: 15px;
+      height: 15px;
+      cursor: pointer;
+    }
+
+    .remember-wrap span {
+      font-size: 13px;
+      color: #6b7280;
+    }
+
+    .btn-auth {
+      width: 100%;
+      padding: 14px;
+      background: var(--forest);
+      color: var(--lime);
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 16px;
+      font-weight: 800;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      margin-bottom: 20px;
+      margin-top: 10px;
+    }
+
+    .btn-auth:hover {
+      background: var(--lime);
+      color: var(--dark);
+      box-shadow: 0 6px 20px rgba(126,200,50,0.35);
+      transform: translateY(-1px);
+    }
+
+    .auth-footer-note {
+      text-align: center;
+      font-size: 13px;
+      color: var(--gray);
+    }
+
+    .auth-footer-note a {
+      color: var(--lime-dark);
+      font-weight: 600;
+      text-decoration: none;
+    }
+
+    .auth-footer-note a:hover { text-decoration: underline; }
+
+    /* Responsive */
+        @media (max-width: 900px) {
+      body { flex-direction: column; }
+      .auth-image-panel { display: flex !important; flex: none; height: 220px; overflow: visible; }
+      .auth-image-content { display: none; }
+      .auth-form-panel { 
+        width: 100%; 
+        border-radius: 30px 30px 0 0; 
+        margin-top: -40px; 
+        padding: 40px 24px; 
+        z-index: 10; 
+        position: relative;
+        background: #ffffff;
+        box-shadow: 0 -10px 40px rgba(0,0,0,0.15); 
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- LEFT: Image Panel -->
+  <div class="auth-image-panel">
+    <img src="asset/image/auth-bg.webp" alt="Sports Action">
+    <div class="auth-image-overlay"></div>
+
+    <a href="index.html" class="auth-logo">
+      <img src="asset/image/stackly_.webp" alt="Stackly Logo" style="width: 150px; height: auto; border: none; background: transparent; padding: 0; border-radius: 0;">
+    </a>
+
+    <div class="auth-image-content">
+      <div class="auth-tagline">
+        <h2>JOIN THE<br>CLUB <span>TODAY</span></h2>
+        <p>Sign up to track your performance, connect with athletes, and reach your full potential.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- RIGHT: Form Panel -->
+  <div class="auth-form-panel">
+    <div class="auth-form-header">
+      <h1>Create Account</h1>
+      <p>Already have an account? <a href="login.html">Sign in here</a></p>
+    </div>
+
+    <!-- Social Login -->
+    <div class="social-btns">
+      <button type="button" class="social-btn" onclick="window.location.href='404.html'"><i class="fab fa-google"></i> Google</button>
+      <button type="button" class="social-btn" onclick="window.location.href='404.html'"><i class="fab fa-facebook-f"></i> Facebook</button>
+    </div>
+
+    <div class="divider"><span>or sign up with email</span></div>
+
+    <!-- Form -->
+    <form action="#" method="POST">
+      <div class="form-group">
+        <label>Select Role</label>
+        <div class="role-selector">
+          <div class="role-option">
+            <input type="radio" name="role" id="roleAthleteSignup" value="athlete" checked>
+            <label for="roleAthleteSignup"><i class="fas fa-running"></i> Athlete</label>
+          </div>
+          <div class="role-option">
+            <input type="radio" name="role" id="roleCoachSignup" value="coach">
+            <label for="roleCoachSignup"><i class="fas fa-clipboard-list"></i> Coach</label>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Full Name</label>
+        <div class="input-wrap">
+          <i class="fas fa-user"></i>
+          <input type="text" name="name" placeholder="John Doe" oninput="this.value = this.value.replace(/[^a-zA-Z\s]/g, '')" required>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Email Address</label>
+        <div class="input-wrap">
+          <i class="fas fa-envelope"></i>
+          <input type="email" name="email" placeholder="you@example.com" required>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Phone Number</label>
+        <div class="input-wrap">
+          <i class="fas fa-phone-alt"></i>
+          <input type="tel" name="phone" placeholder="Enter phone number" oninput="this.value = this.value.replace(/[^0-9]/g, '')" required>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Password</label>
+        <div class="input-wrap">
+          <i class="fas fa-lock"></i>
+          <input type="password" name="password" id="signupPassword" placeholder="Create a password" required>
+          <button type="button" class="toggle-password" onclick="togglePass('signupPassword', this)">
+            <i class="fas fa-eye"></i>
+          </button>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Confirm Password</label>
+        <div class="input-wrap">
+          <i class="fas fa-lock"></i>
+          <input type="password" name="confirm_password" id="confirmPassword" placeholder="Confirm your password" required>
+          <button type="button" class="toggle-password" onclick="togglePass('confirmPassword', this)">
+            <i class="fas fa-eye"></i>
+          </button>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <label class="remember-wrap">
+          <input type="checkbox" required> <span>I agree to the <a href="404.html" class="forgot-link">Terms</a> &amp; <a href="404.html" class="forgot-link">Privacy Policy</a></span>
+        </label>
+      </div>
+
+      <button type="submit" class="btn-auth">Create Account &rarr;</button>
+    </form>
+
+    <div class="auth-footer-note">
+      Already have an account? <a href="login.html">Sign in here</a>
+    </div>
+  </div>
+
+  <script>
+    function togglePass(id, btn) {
+      const input = document.getElementById(id);
+      const icon = btn.querySelector('i');
+      if (input.type === 'password') {
+        input.type = 'text';
+        icon.classList.replace('fa-eye', 'fa-eye-slash');
+      } else {
+        input.type = 'password';
+        icon.classList.replace('fa-eye-slash', 'fa-eye');
+      }
+    }
+
+    document.querySelector('form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const name = this.querySelector('input[name="name"]').value;
+      const email = this.querySelector('input[name="email"]').value;
+      const role = this.querySelector('input[name="role"]:checked').value;
+      
+      localStorage.setItem('stacklyUser', JSON.stringify({
+        name: name,
+        email: email,
+        role: role
+      }));
+
+      window.location.href = `dashboard-${role}.html`;
+    });
+  </script>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  var go404 = function(e) { e.preventDefault(); window.location.href = '404.html'; };
+
+  // CTA button classes to intercept
+  var ctaBtnClasses = [
+    'btn-all-testimonials','btn-about-explore','btn-proud-enrol',
+    'btn-blog-member','btn-blog-benefits','btn-schedules',
+    'btn-learn-more','btn-cta','btn-join-member','btn-join-benefits',
+    'btn-join','btn-register','btn-book','btn-view','btn-enroll',
+    'btn-get-started','btn-try','btn-explore','btn-play','btn-watch',
+    'card-btn','hero-btn','program-btn','sport-btn','btn-clay-directions'
+  ];
+  ctaBtnClasses.forEach(function(cls) {
+    document.querySelectorAll('.' + cls).forEach(function(el) {
+      el.addEventListener('click', go404);
+    });
+  });
+
+  // <a> tags pointing to services.html or 404.html-redirects (catch any remaining)
+  document.querySelectorAll('a[href="services.html"]').forEach(function(a) {
+    a.href = '404.html';
+  });
+
+  // Any button without onclick/type=submit whose text matches CTA keywords
+  var keywords = ['LEARN MORE','JOIN NOW','GET STARTED','ALL TESTIMONIALS',
+    'EXPLORE','REGISTER','BOOK NOW','VIEW MORE','ENROLL','BECOME A MEMBER',
+    'MEMBERS BENEFITS','SCHEDULES','VIEW DETAILS','BUY NOW','ADD TO CART',
+    'SHOP NOW','DISCOVER','READ MORE','SEE MORE','VIEW ALL','ALL REVIEWS',
+    'ALL PROGRAMS','VIEW PROGRAM','GET TICKETS','APPLY NOW'];
+
+  document.querySelectorAll('button, a.btn, a[class*="btn-"]').forEach(function(el) {
+    var skipClasses = ['toggle-password','modal-close-btn','menu-toggle',
+      'nav-icon-btn','tilted-nav-btn','btn-auth','social-btn',
+      'btn-submit-contact','logout-btn','nav-link','btn-enquiry','btn-proud-enrol'];
+    var isSkip = skipClasses.some(function(s){ return el.classList.contains(s); });
+    var hasRealHref = el.tagName === 'A' && el.href &&
+      !el.href.endsWith('#') && !el.href.includes('services.html') &&
+      el.href.includes('.html') && !el.href.includes('404.html');
+    if (!isSkip && !hasRealHref) {
+      var txt = el.textContent.trim().toUpperCase();
+      if (keywords.some(function(k){ return txt.indexOf(k) !== -1; })) {
+        el.addEventListener('click', go404);
+      }
+    }
+  });
+});
+</script>
+</body>
+</html>

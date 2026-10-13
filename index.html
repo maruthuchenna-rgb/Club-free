@@ -1,0 +1,1135 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Stackly | Sports Theme</title>
+  <meta name="description" content="Stackly Sports Theme - Complete Sports & Athletics Theme with Programs, Explore Our Club, Testimonials, Location and Membership.">
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/webp" href="asset/image/stackly_.webp">
+
+  <!-- FontAwesome 6 Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <!-- Theme Stylesheet -->
+  <link rel="stylesheet" href="asset/css/style.css">
+
+  <style>
+    /* Preloader Styles */
+    #preloader {
+      position: fixed;
+      inset: 0;
+      background: #0f2518;
+      z-index: 999999;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      transition: transform 0.8s cubic-bezier(0.68, -0.55, 0.27, 1.55), opacity 0.8s ease-out, visibility 0.8s ease-out;
+    }
+    .preloader-content {
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+    }
+    .preloader-logo-container {
+      position: relative;
+      width: 120px;
+      height: 120px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .preloader-ring {
+      position: absolute;
+      inset: 0;
+      border: 3px dashed #bbf779;
+      border-radius: 50%;
+      animation: spinRing 4s linear infinite;
+      opacity: 0.8;
+    }
+    .preloader-logo {
+      width: 90px;
+      height: 90px;
+      object-fit: contain;
+      animation: pulseLogo 1.2s infinite alternate;
+      border-radius: 50%;
+      background: #ffffff;
+      padding: 5px;
+      position: relative;
+      z-index: 2;
+       
+    }
+    .preloader-icons {
+      display: flex;
+      gap: 15px;
+      color: #bbf779;
+      font-size: 24px;
+    }
+    .preloader-icons i {
+      animation: bounceSpinIcon 1.5s infinite;
+    }
+    .preloader-icons i:nth-child(2) { animation-delay: 0.2s; }
+    .preloader-icons i:nth-child(3) { animation-delay: 0.4s; }
+    .preloader-icons i:nth-child(4) { animation-delay: 0.6s; }
+    
+    .preloader-text {
+      color: #ffffff;
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 18px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-top: 5px;
+      animation: pulseText 1.5s infinite alternate;
+    }
+    .preloader-text span {
+      animation: blinkDot 1.4s infinite both;
+    }
+    .preloader-text span:nth-child(2) { animation-delay: 0.2s; }
+    .preloader-text span:nth-child(3) { animation-delay: 0.4s; }
+
+    .preloader-bar {
+      width: 200px;
+      height: 4px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 10px;
+      overflow: hidden;
+      margin-top: 5px;
+    }
+    .preloader-progress {
+      width: 0%;
+      height: 100%;
+      background: #bbf779;
+      border-radius: 10px;
+      animation: loadProgress 1.5s ease-in-out forwards;
+      box-shadow: 0 0 10px #bbf779;
+    }
+
+    @keyframes spinRing {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    @keyframes pulseLogo {
+      0% { transform: scale(1); box-shadow: 0 0 10px rgba(187, 247, 121, 0.3); }
+      100% { transform: scale(1.05); box-shadow: 0 0 30px rgba(187, 247, 121, 0.8); }
+    }
+    @keyframes bounceSpinIcon {
+      0%, 100% { transform: translateY(0) rotate(0deg); color: #bbf779; }
+      50% { transform: translateY(-15px) rotate(180deg); color: #ffffff; }
+    }
+    @keyframes pulseText {
+      0% { opacity: 0.7; }
+      100% { opacity: 1; text-shadow: 0 0 8px rgba(255,255,255,0.5); }
+    }
+    @keyframes blinkDot {
+      0%, 100% { opacity: 0; }
+      50% { opacity: 1; }
+    }
+    @keyframes loadProgress {
+      0% { width: 0%; }
+      70% { width: 80%; }
+      100% { width: 100%; }
+    }
+    
+    body.preloader-hidden #preloader {
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-100%);
+    }
+  </style>
+  <link rel="stylesheet" href="asset/css/scroll-animations.css">
+</head>
+<body>
+  <!-- ==========================================================================
+       PRELOADER
+       ========================================================================== -->
+  <div id="preloader">
+    <div class="preloader-content">
+      <div class="preloader-logo-container">
+        <div class="preloader-ring"></div>
+        <img src="asset/image/stackly_.webp" alt="Stackly Logo" class="preloader-logo">
+      </div>
+      <div class="preloader-icons">
+        <i class="fas fa-futbol"></i>
+        <i class="fas fa-basketball-ball"></i>
+        <i class="fas fa-dumbbell"></i>
+        <i class="fas fa-running"></i>
+      </div>
+      <div class="preloader-text">Warming up<span>.</span><span>.</span><span>.</span></div>
+      <div class="preloader-bar">
+        <div class="preloader-progress"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       1. HEADER & NAVIGATION
+       ========================================================================== -->
+  <header class="header-area">
+    <div class="nav-container">
+      <!-- Logo Branding -->
+      <a href="index.html" class="logo-wrapper">
+        <img src="asset/image/stackly_.webp" alt="Stackly Logo" class="logo-img">
+        
+      </a>
+
+      <!-- Navigation Menu (Home, About, Blog, Shop, Services, Contact) -->
+      <nav class="nav-menu" id="navMenu">
+        <a href="index.html" class="nav-link active">Home</a>
+        <a href="about.html" class="nav-link">About</a>
+        <a href="blog.html" class="nav-link">Blog</a>
+        <a href="Rent.html" class="nav-link">Rent</a>
+        <a href="ourteam.html" class="nav-link">Our Team</a>
+        <a href="contact.html" class="nav-link">Contact</a>
+        <a href="login.html" class="btn-enquiry mobile-only-enquiry">Enquiry</a>
+        </nav>
+
+      <!-- Nav Actions -->
+      <div class="nav-actions">
+      
+        <a href="login.html" class="btn-enquiry">
+          Enquiry
+        </a>
+        <button class="menu-toggle" id="menuToggle" aria-label="Toggle Menu">
+          <i class="fas fa-bars"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ==========================================================================
+       2. HERO SECTION WITH 5-SLIDE CAROUSEL & 6-CATEGORY BOTTOM STRIP
+       ========================================================================== -->
+  <section class="hero-slider-section" id="home">
+    <!-- Diagonal Dynamic Accent Lines (Exact Replica from Reference Image) -->
+    <div class="diagonal-accent-1"></div>
+    <div class="diagonal-accent-2"></div>
+    <div class="diagonal-accent-3"></div>
+
+    <div class="slider-container">
+      <!-- Slide 1: American Football / Main Match (Exact match to screenshot!) -->
+      <div class="hero-slide active">
+        <img src="asset/image/hero-1.webp" alt="Sports Match in Stadium" class="slide-bg">
+        <div class="slide-overlay"></div>
+        <div class="container">
+          <div class="slide-content-wrap">
+            <span class="slide-kicker">BE A PART OF IT</span>
+            <h1 class="slide-title">WE CREATE<br>HISTORY</h1>
+            <p class="slide-desc">
+              With lots of Features &amp; Stylish Shortcodes makes <strong>WHISTLE</strong> a Complete Sports Theme
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 2: Football / Soccer Academy -->
+      <div class="hero-slide">
+        <img src="asset/image/hero-2.webp" alt="Soccer Stadium Championship" class="slide-bg">
+        <div class="slide-overlay"></div>
+        <div class="container">
+          <div class="slide-content-wrap">
+            <span class="slide-kicker">CHAMPIONSHIP ARENA</span>
+            <h1 class="slide-title">CHAMPIONS<br>ARE BORN HERE</h1>
+            <p class="slide-desc">
+              Experience premier football training, tactical masterclasses, and national league tournament play.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 3: Pro Basketball Arena -->
+      <div class="hero-slide">
+        <img src="asset/image/hero-3.webp" alt="Basketball Court Action" class="slide-bg">
+        <div class="slide-overlay"></div>
+        <div class="container">
+          <div class="slide-content-wrap">
+            <span class="slide-kicker">COURT DOMINANCE</span>
+            <h1 class="slide-title">DOMINATE<br>THE COURT</h1>
+            <p class="slide-desc">
+              Master your jump shot, ball handling, and agility on NBA-standard hardwood courts.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 4: Track & Athletics Sprint -->
+      <div class="hero-slide">
+        <img src="asset/image/hero-4.webp" alt="Track Running Athletics" class="slide-bg">
+        <div class="slide-overlay"></div>
+        <div class="container">
+          <div class="slide-content-wrap">
+            <span class="slide-kicker">OLYMPIC SPEED</span>
+            <h1 class="slide-title">UNLEASH<br>YOUR SPEED</h1>
+            <p class="slide-desc">
+              High-performance synthetic running tracks, sprint biomechanics analytics, and endurance training.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 5: Elite Weight & Crossfit Training -->
+      <div class="hero-slide">
+        <img src="asset/image/hero-5.webp" alt="Weight Training Gym" class="slide-bg">
+        <div class="slide-overlay"></div>
+        <div class="container">
+          <div class="slide-content-wrap">
+            <span class="slide-kicker">PRO STRENGTH LAB</span>
+            <h1 class="slide-title">POWER &amp;<br>STRENGTH</h1>
+            <p class="slide-desc">
+              State-of-the-art powerlifting zones, Olympic barbells, kettlebell conditioning, and personalized sports coaches.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Left / Right Slider Navigation Arrows -->
+    <button class="slider-nav-arrow slider-nav-prev" aria-label="Previous Slide">
+      <i class="fas fa-chevron-left"></i>
+    </button>
+    <button class="slider-nav-arrow slider-nav-next" aria-label="Next Slide">
+      <i class="fas fa-chevron-right"></i>
+    </button>
+
+    <!-- Slider Control Bar (< o o o || > replica) -->
+    <div class="slider-control-bar">
+      <button class="ctrl-btn" id="sliderPrevBtn" aria-label="Previous">
+        <i class="fas fa-chevron-left"></i>
+      </button>
+      <div class="slider-dots">
+        <span class="dot active" data-slide="0"></span>
+        <span class="dot" data-slide="1"></span>
+        <span class="dot" data-slide="2"></span>
+        <span class="dot" data-slide="3"></span>
+        <span class="dot" data-slide="4"></span>
+      </div>
+      <button class="pause-play-btn" id="sliderPlayPause" title="Pause / Play Autoplay">
+        <i class="fas fa-pause"></i>
+      </button>
+      <button class="ctrl-btn" id="sliderNextBtn" aria-label="Next">
+        <i class="fas fa-chevron-right"></i>
+      </button>
+    </div>
+
+    <!-- ==========================================================================
+         BOTTOM 6-CATEGORY HERO STRIP (Exact from Screenshot)
+         ========================================================================== -->
+    <div class="hero-bottom-strip">
+      <!-- 1. Cycling -->
+      <div class="strip-item">
+        <img src="asset/image/sport-cycling.webp" alt="Cycling" class="strip-bg">
+        <div class="strip-overlay"></div>
+        <div class="strip-content">
+          <i class="fas fa-bicycle strip-icon"></i>
+          <span class="strip-title">CYCLING</span>
+        </div>
+      </div>
+
+      <!-- 2. Golf -->
+      <div class="strip-item">
+        <img src="asset/image/sport-golf.webp" alt="Golf" class="strip-bg">
+        <div class="strip-overlay"></div>
+        <div class="strip-content">
+          <i class="fas fa-golf-ball strip-icon"></i>
+          <span class="strip-title">GOLF</span>
+        </div>
+      </div>
+
+      <!-- 3. Swimming -->
+      <div class="strip-item">
+        <img src="asset/image/sport-swimming.webp" alt="Swimming" class="strip-bg">
+        <div class="strip-overlay"></div>
+        <div class="strip-content">
+          <i class="fas fa-swimmer strip-icon"></i>
+          <span class="strip-title">SWIMMING</span>
+        </div>
+      </div>
+
+      <!-- 4. Tennis -->
+      <div class="strip-item">
+        <img src="asset/image/sport-tennis.webp" alt="Tennis" class="strip-bg">
+        <div class="strip-overlay"></div>
+        <div class="strip-content">
+          <i class="fas fa-table-tennis strip-icon"></i>
+          <span class="strip-title">TENNIS</span>
+        </div>
+      </div>
+
+      <!-- 5. Track Training -->
+      <div class="strip-item">
+        <img src="asset/image/sport-track.webp" alt="Track Training" class="strip-bg">
+        <div class="strip-overlay"></div>
+        <div class="strip-content">
+          <i class="fas fa-running strip-icon"></i>
+          <span class="strip-title">TRACK TRAINING</span>
+        </div>
+      </div>
+
+      <!-- 6. Weight Training -->
+      <div class="strip-item">
+        <img src="asset/image/sport-weight.webp" alt="Weight Training" class="strip-bg">
+        <div class="strip-overlay"></div>
+        <div class="strip-content">
+          <i class="fas fa-dumbbell strip-icon"></i>
+          <span class="strip-title">WEIGHT TRAINING</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       3. PROMO BANNER SECTION
+       ========================================================================== -->
+  <section class="promo-banner-section">
+    <div class="container">
+      <div class="promo-grid">
+        <!-- Left Image: Indoor Court -->
+        <div class="promo-img-card">
+          <img src="asset/image/promo-court.webp" alt="Indoor Sports Facility Court">
+        </div>
+
+        <!-- Center Card: Promo Text -->
+        <div class="promo-text-card">
+          <span class="badge-pill-lime">NEW</span>
+          <h2 class="promo-main-title">FALL YOUTH SPORTS CLASSES START IN SEPTEMBER!</h2>
+          <p class="promo-subtext-1">Explore Gymnastics, Ninja, Soccer, Basketball, Volleyball, Tennis + More!</p>
+          <p class="promo-subtext-2">12-week Trimester<br>Starts in September.</p>
+          <a href="404.html" class="btn-lime-rect">LEARN MORE</a>
+        </div>
+
+        <!-- Right Image: Kids with Ball -->
+        <div class="promo-img-card">
+          <img src="asset/image/promo-kids.webp" alt="Kids Youth Sports Team">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       4. PROGRAMS FOR EVERYONE SECTION
+       ========================================================================== -->
+  <section class="programs-section" id="programs">
+    <div class="container">
+      <!-- Section Header -->
+      <div class="programs-header">
+        <span class="badge-pill-lime">OUR OFFERS</span>
+        <h2 class="programs-main-title">PROGRAMS FOR EVERYONE</h2>
+      </div>
+
+      <!-- Row 1: Two Large Horizontal Split Cards (SPORTS & AQUATICS) -->
+      <div class="programs-large-grid">
+        <!-- 1. SPORTS Card -->
+        <div class="program-horizontal-card">
+          <div class="program-card-img">
+            <img src="asset/image/program-sports.webp" alt="Sports Program">
+          </div>
+          <div class="program-card-body">
+            <div class="program-category-badge">
+              <i class="fas fa-volleyball-ball"></i>
+              <span>KIDS &amp; ADULTS</span>
+            </div>
+            <h3 class="program-card-title">SPORTS</h3>
+            <p class="program-card-desc">
+              Explore our top-notch sports instruction and leagues for kids and adults including basketball, soccer, baseball and more.
+            </p>
+            <a href="404.html" class="program-action-link">
+              <span class="arrow-circle-lime"><i class="fas fa-arrow-right"></i></span>
+              <span>ALL SPORTS</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- 2. AQUATICS Card -->
+        <div class="program-horizontal-card">
+          <div class="program-card-img">
+            <img src="asset/image/program-aquatics.webp" alt="Aquatics Swimming Program">
+          </div>
+          <div class="program-card-body">
+            <div class="program-category-badge">
+              <i class="fas fa-water"></i>
+              <span>KIDS &amp; ADULTS</span>
+            </div>
+            <h3 class="program-card-title">AQUATICS</h3>
+            <p class="program-card-desc">
+              Experience our Aquatics program, designed to enhance swimming skills and offer a variety of engaging water activities for all ages.
+            </p>
+            <a href="404.html" class="program-action-link">
+              <span class="arrow-circle-lime"><i class="fas fa-arrow-right"></i></span>
+              <span>LEARN MORE</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Row 2: Four Vertical Cards (FITNESS, CAMPS, RENT, DAYCARE) -->
+      <div class="programs-vertical-grid">
+        <!-- 1. FITNESS -->
+        <div class="program-vertical-card">
+          <div class="vertical-card-img">
+            <img src="asset/image/program-fitness.webp" alt="Fitness Program">
+          </div>
+          <div class="vertical-card-body">
+            <div class="program-category-badge">
+              <i class="fas fa-dumbbell"></i>
+              <span>ADULTS</span>
+            </div>
+            <h3 class="vertical-card-title">FITNESS</h3>
+            <p class="vertical-card-desc">
+              Discover our Fitness program, featuring diverse classes and expert coaching to help you reach your health and wellness goals.
+            </p>
+            <a href="404.html" class="program-action-link">
+              <span class="arrow-circle-lime"><i class="fas fa-arrow-right"></i></span>
+              <span>LEARN MORE</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- 2. CAMPS -->
+        <div class="program-vertical-card">
+          <div class="vertical-card-img">
+            <img src="asset/image/program-camps.webp" alt="Sports Camps Program">
+          </div>
+          <div class="vertical-card-body">
+            <div class="program-category-badge">
+              <i class="fas fa-campground"></i>
+              <span>KIDS</span>
+            </div>
+            <h3 class="vertical-card-title">CAMPS</h3>
+            <p class="vertical-card-desc">
+              Our Camps program features sports activities that promote teamwork, skill development, and friendships for young athletes.
+            </p>
+            <a href="404.html" class="program-action-link">
+              <span class="arrow-circle-lime"><i class="fas fa-arrow-right"></i></span>
+              <span>LEARN MORE</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- 3. RENT -->
+        <div class="program-vertical-card">
+          <div class="vertical-card-img">
+            <img src="asset/image/program-rent.webp" alt="Rent Sports Facilities">
+          </div>
+          <div class="vertical-card-body">
+            <div class="program-category-badge">
+              <i class="fas fa-home"></i>
+              <span>KIDS &amp; ADULTS</span>
+            </div>
+            <h3 class="vertical-card-title">RENT</h3>
+            <p class="vertical-card-desc">
+              Rent our top-notch sports facilities for your events, providing the perfect venue for practice or competition.
+            </p>
+            <a href="404.html" class="program-action-link">
+              <span class="arrow-circle-lime"><i class="fas fa-arrow-right"></i></span>
+              <span>LEARN MORE</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- 4. DAYCARE -->
+        <div class="program-vertical-card">
+          <div class="vertical-card-img">
+            <img src="asset/image/program-daycare.webp" alt="Child Daycare Program">
+          </div>
+          <div class="vertical-card-body">
+            <div class="program-category-badge">
+              <i class="fas fa-baby"></i>
+              <span>KIDS</span>
+            </div>
+            <h3 class="vertical-card-title">DAYCARE</h3>
+            <p class="vertical-card-desc">
+              Daycare provides a safe and engaging environment for your child while you train, ensuring peace of mind during your workout.
+            </p>
+            <a href="404.html" class="program-action-link">
+              <span class="arrow-circle-lime"><i class="fas fa-arrow-right"></i></span>
+              <span>LEARN MORE</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       5. EXPLORE OUR CLUB SECTION
+       ========================================================================== -->
+  <section class="explore-club-section" id="about">
+    <!-- Top Aerial Sports Facility Banner -->
+    <div class="facility-aerial-banner" style="position:relative; overflow:hidden;">
+      <!-- Local Sports Ground Autoplay Video -->
+      <video
+        id="facilityVideo"
+        autoplay
+        muted
+        loop
+        playsinline
+        style="position:absolute; top:0; left:0; width:100%; height:100%; object-fit:cover; z-index:0;"
+      >
+        <source src="asset/video/13652703_1920_1080_30fps.mp4" type="video/mp4">
+        <img src="asset/image/facility-aerial.webp" alt="Sports Ground">
+      </video>
+      <!-- Dark overlay -->
+      <div style="position:absolute; inset:0; background:rgba(10,26,8,0.40); z-index:1;"></div>
+      <!-- Pause/Play toggle -->
+      <button class="facility-video-btn" id="facilityVideoToggle" title="Pause/Play Video" style="position:absolute; z-index:2; top:50%; left:50%; transform:translate(-50%,-50%);">
+        <i class="fas fa-pause" id="facilityVideoIcon"></i>
+      </button>
+    </div>
+
+    <!-- Floating White Content Card -->
+    <div class="container explore-card-wrap">
+      <div class="explore-white-card">
+        <!-- 3D Basketball Graphic Accent -->
+        <div class="explore-basketball-graphic">
+          <i class="fas fa-basketball-ball"></i>
+        </div>
+
+        <span class="badge-pill-lime">ABOUT US</span>
+        <h2 class="explore-title">EXPLORE OUR CLUB</h2>
+        <p class="explore-desc">
+          Discover our modern facilities and enjoy our top-notch amenities. Our friendly staff will guide you through a variety of group classes, high-quality fitness equipment, spacious aquatic pools, and a fun, safe kids' club.
+        </p>
+        <p class="explore-desc">
+          Our venue is the ideal place for fitness, relaxation, and family fun.
+        </p>
+
+        <!-- Action Links -->
+        <div class="explore-action-row">
+          <a href="404.html" class="program-action-link">
+            <span class="arrow-circle-lime"><i class="fas fa-arrow-right"></i></span>
+            <span>OUR MISSION</span>
+          </a>
+          <a href="#location" class="program-action-link">
+            <span class="arrow-circle-lime"><i class="fas fa-arrow-right"></i></span>
+            <span>OUR FACILITY</span>
+          </a>
+        </div>
+
+        <!-- 3 Stats -->
+        <div class="explore-stats-row">
+          <div class="explore-stat-box">
+            <div class="explore-stat-num">175,000</div>
+            <div class="explore-stat-label">SQUARE FOOT INDOOR SPORTS</div>
+          </div>
+          <div class="explore-stat-box">
+            <div class="explore-stat-num">35 ACRES</div>
+            <div class="explore-stat-label">LAND SPACE FOR OUTDOOR</div>
+          </div>
+          <div class="explore-stat-box">
+            <div class="explore-stat-num">24/7</div>
+            <div class="explore-stat-label">AVAILABLE EVEN AT NIGHT</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Angled Lime Bottom Polygon Strip with 5 Sports Icons -->
+      <div class="sports-icons-strip-wrap">
+        <div class="sports-icons-strip">
+          <div class="sports-icon-bubble" onclick="window.location.href='404.html'" style="cursor:pointer" title="Tennis"><i class="fas fa-baseball-ball"></i></div>
+          <div class="sports-icon-bubble" onclick="window.location.href='404.html'" style="cursor:pointer" title="Soccer"><i class="fas fa-futbol"></i></div>
+          <div class="sports-icon-bubble" onclick="window.location.href='404.html'" style="cursor:pointer" title="Basketball"><i class="fas fa-basketball-ball"></i></div>
+          <div class="sports-icon-bubble" onclick="window.location.href='404.html'" style="cursor:pointer" title="Football"><i class="fas fa-football-ball"></i></div>
+          <div class="sports-icon-bubble" onclick="window.location.href='404.html'" style="cursor:pointer" title="Volleyball"><i class="fas fa-volleyball-ball"></i></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Full-Width Values Headline Banner -->
+    <div class="values-headline-banner">
+      <div class="container">
+        <div class="values-banner-text">
+          <span>HEART.</span>
+          <span class="dim">RESPECT.</span>
+          <span>TEAMWORK.</span>
+          <span class="dim">INTEGRITY.</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       6. DEEP FOREST GREEN VALUES SECTION (COMMUNITY & FUN)
+       ========================================================================== -->
+  <section class="club-values-section">
+    <div class="values-container">
+      <!-- Row 1: COMMUNITY -->
+      <div class="value-row-block">
+        <div class="value-text-wrap">
+          <h2 class="value-main-title">COMMUNITY</h2>
+          <p class="value-desc-text">
+            We unite players, families, and coaches in an inclusive environment where everyone feels valued. Through events and support for one another, we foster connections that go beyond the sport.
+          </p>
+        </div>
+        <div class="value-img-card-wrap">
+          <div class="value-tilted-img-card tilt-right">
+            <img src="asset/image/community-team.webp" alt="Athletes Community Team">
+          </div>
+        </div>
+      </div>
+
+      <!-- Row 2: FUN -->
+      <div class="value-row-block reverse-mobile" style="margin-top: 50px;">
+        <div class="value-img-card-wrap">
+          <div class="value-tilted-img-card tilt-left">
+            <img src="asset/image/hero-2.webp" alt="Youth Basketball Fun Coach and Team">
+          </div>
+        </div>
+        <div class="value-text-wrap">
+          <h2 class="value-main-title">FUN</h2>
+          <p class="value-desc-text">
+            Enjoying the game creates a positive environment for players to thrive. Through team activities and outings, we foster joyful experiences that build teamwork and lasting memories.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       7. TESTIMONIALS POLAROID GALLERY SECTION (Exact Match with Reference Image)
+       ========================================================================== -->
+  <section class="testimonials-section" id="testimonials">
+    <!-- Translucent Background Watermark -->
+    <div class="teamwork-watermark">TEAMWORK</div>
+
+    <!-- Background Tennis/Pickleball Players Card -->
+    <div class="pickleball-backdrop-card">
+      <img src="asset/image/pickleball-handshake.webp" alt="Players Handshake">
+    </div>
+
+    <div class="container" style="position: relative; z-index: 10;">
+      <!-- Top Center Header Card -->
+      <div class="testimonials-header-card">
+        <div class="testi-header-dark">
+          <span class="badge-pill-lime" style="margin-bottom: 0;">TESTIMONIALS</span>
+          <h2 class="testi-header-title">HERE'S WHAT EAGLE-ELITE FAMILIES ARE SAYING:</h2>
+        </div>
+        <div class="testi-header-lime">
+          <button class="btn-all-testimonials">ALL TESTIMONIALS</button>
+        </div>
+      </div>
+
+      <!-- Polaroids Grid -->
+      <div class="polaroids-grid">
+        <!-- Polaroid 1: Top Left -->
+        <div class="polaroid-box">
+          <div class="polaroid-frame">
+            <div class="tape-accent"></div>
+            <div class="polaroid-img-wrap">
+              <img src="asset/image/polaroid-soccer-kids.webp" alt="Celebrating Team Spirit">
+            </div>
+            <div class="polaroid-caption">Celebrating Team Spirit</div>
+          </div>
+          <div class="polaroid-quote-body">
+            <i class="fas fa-quote-left quote-icon"></i>
+            <p class="polaroid-quote-text">
+              Being part of this club means everything to me. Our coach fosters a true sense of teamwork, and the celebrations after every match, win or lose, bring us closer together. It's all about lifting each other up!
+            </p>
+            <span class="polaroid-author">by Emily</span>
+          </div>
+        </div>
+
+        <!-- Polaroid 2: Center Underneath Header -->
+        <div class="polaroid-box" style="margin-top: -30px;">
+          <div class="polaroid-frame">
+            <div class="tape-accent"></div>
+            <div class="polaroid-img-wrap">
+              <img src="asset/image/hero-2.webp" alt="Volley Squad Vibes">
+            </div>
+            <div class="polaroid-caption">Volley Squad Vibes</div>
+          </div>
+          <div class="polaroid-quote-body">
+            <i class="fas fa-quote-left quote-icon"></i>
+            <p class="polaroid-quote-text">
+              As a parent, I love seeing my child thrive in this volleyball team! The energy during practices is contagious, and Coach Alex really knows how to keep the vibe positive. It's amazing to watch the kids grow together while having so much fun!
+            </p>
+            <span class="polaroid-author">by Sophia</span>
+          </div>
+        </div>
+
+        <!-- Polaroid 3: Top Right -->
+        <div class="polaroid-box">
+          <div class="polaroid-frame">
+            <div class="tape-accent"></div>
+            <div class="polaroid-img-wrap">
+              <img src="asset/image/polaroid-coach-champs.webp" alt="Coach and Future Champs">
+            </div>
+            <div class="polaroid-caption">Coach and Future Champs</div>
+          </div>
+          <div class="polaroid-quote-body">
+            <i class="fas fa-quote-left quote-icon"></i>
+            <p class="polaroid-quote-text">
+              Coach Mike is incredible! He builds my son's confidence while teaching the game. It's amazing to see him and his teammates grow together as future champions!
+            </p>
+            <span class="polaroid-author">by David</span>
+          </div>
+        </div>
+
+        <!-- Polaroid 4: Bottom Left -->
+        <div class="polaroid-box" style="margin-top: 30px;">
+          <div class="polaroid-frame">
+            <div class="tape-accent"></div>
+            <div class="polaroid-img-wrap">
+              <img src="asset/image/polaroid-pool-smiles.webp" alt="Poolside Smiles">
+            </div>
+            <div class="polaroid-caption">Poolside Smiles</div>
+          </div>
+          <div class="polaroid-quote-body">
+            <i class="fas fa-quote-left quote-icon"></i>
+            <p class="polaroid-quote-text">
+              Joining this swim club has been a fantastic experience! We work hard, but we also know how to have fun together. Coach Jenna inspires us to do our best and celebrate our achievements!
+            </p>
+            <span class="polaroid-author">by Mark Twain</span>
+          </div>
+        </div>
+
+        <!-- Placeholder for symmetry / spacer -->
+        <div class="polaroid-box" style="visibility: hidden; display: none;"></div>
+
+        <!-- Polaroid 5: Bottom Right -->
+        <div class="polaroid-box" style="margin-top: 30px; grid-column: 3;">
+          <div class="polaroid-frame">
+            <div class="tape-accent"></div>
+            <div class="polaroid-img-wrap">
+              <img src="asset/image/polaroid-team-cheer.webp" alt="Team Spirit Off-Court">
+            </div>
+            <div class="polaroid-caption">Team Spirit Off-Court</div>
+          </div>
+          <div class="polaroid-quote-body">
+            <i class="fas fa-quote-left quote-icon"></i>
+            <p class="polaroid-quote-text">
+              Nothing beats hanging out with the team after a game! We grab some cold drinks and celebrate our victories. Coach Mike always says a strong bond off the field makes us better on it.
+            </p>
+            <span class="polaroid-author">by Jake</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       8. CLAY COURT LOCATION & HOURS SECTION (Exact Match with Reference Image)
+       ========================================================================== -->
+  <section class="clay-location-section" id="location">
+    <div class="clay-overlay"></div>
+    <div class="container" style="position: relative; z-index: 2;">
+      <div class="clay-grid">
+        <!-- Location Column -->
+        <div>
+          <div class="clay-icon-wrap">
+            <i class="fas fa-map-marker-alt"></i>
+          </div>
+          <h2 class="clay-col-title">LOCATION</h2>
+          <p class="clay-address-text">2200 SW Cedar Hills Blvd, Portland, Oregon 97225</p>
+          <a href="https://maps.google.com" target="_blank" class="btn-clay-directions">
+            <span class="arrow-circle-lime"><i class="fas fa-arrow-right"></i></span>
+            <span>GET DIRECTIONS</span>
+          </a>
+        </div>
+
+        <!-- Hours Column -->
+        <div>
+          <div class="clay-icon-wrap">
+            <i class="far fa-clock"></i>
+          </div>
+          <h2 class="clay-col-title">HOURS</h2>
+          <table class="hours-list">
+            <tbody>
+              <tr>
+                <td class="day-label">Monday</td>
+                <td class="time-label">8:00am &ndash; 10:00pm</td>
+              </tr>
+              <tr>
+                <td class="day-label">Tuesday</td>
+                <td class="time-label">8:00am &ndash; 10:00pm</td>
+              </tr>
+              <tr>
+                <td class="day-label">Wednesday</td>
+                <td class="time-label">8:00am &ndash; 10:00pm</td>
+              </tr>
+              <tr>
+                <td class="day-label">Thursday</td>
+                <td class="time-label">8:00am &ndash; 10:00pm</td>
+              </tr>
+              <tr>
+                <td class="day-label">Friday</td>
+                <td class="time-label">8:00am &ndash; 10:00pm</td>
+              </tr>
+              <tr>
+                <td class="day-label">Weekends</td>
+                <td class="time-label">11:00am &ndash; 10:00pm</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       9. JOIN OUR COMMUNITY STRIP
+       ========================================================================== -->
+  <section class="join-community-strip" id="membership">
+    <div class="container">
+      <div class="join-community-content">
+        <h2 class="join-title-lime">JOIN OUR COMMUNITY</h2>
+        <div class="join-btns-wrap">
+          <button class="btn-join-member" onclick="alert('Welcome to Stackly Sports Club! Membership registration opening soon.');">
+            BECOME A MEMBER
+          </button>
+          <button class="btn-join-benefits" onclick="document.getElementById('benefits').scrollIntoView({behavior: 'smooth'});">
+            MEMBERS BENEFITS
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       10. 4 FEATURE / BENEFIT CHECKPOINTS
+       ========================================================================== -->
+  <section class="benefits-checkpoint-section" id="benefits">
+    <div class="container">
+      <div class="benefits-grid">
+        <!-- Benefit 1 -->
+        <div class="benefit-item">
+          <div class="benefit-header-row">
+            <span class="check-circle-icon"><i class="fas fa-check"></i></span>
+            <h3 class="benefit-item-title">UNLIMITED ACCESS</h3>
+          </div>
+          <p class="benefit-item-desc">
+            Full access to gym, pool, group classes, and specialized zones.
+          </p>
+        </div>
+
+        <!-- Benefit 2 -->
+        <div class="benefit-item">
+          <div class="benefit-header-row">
+            <span class="check-circle-icon"><i class="fas fa-check"></i></span>
+            <h3 class="benefit-item-title">DISCOUNTS</h3>
+          </div>
+          <p class="benefit-item-desc">
+            Special rates for tournaments, workshops, spa services, and personal training.
+          </p>
+        </div>
+
+        <!-- Benefit 3 -->
+        <div class="benefit-item">
+          <div class="benefit-header-row">
+            <span class="check-circle-icon"><i class="fas fa-check"></i></span>
+            <h3 class="benefit-item-title">FREE CONSULTATIONS</h3>
+          </div>
+          <p class="benefit-item-desc">
+            Personalized sessions with trainers, nutritionists, or physiotherapists.
+          </p>
+        </div>
+
+        <!-- Benefit 4 -->
+        <div class="benefit-item">
+          <div class="benefit-header-row">
+            <span class="check-circle-icon"><i class="fas fa-check"></i></span>
+            <h3 class="benefit-item-title">PRIORITY BOOKING</h3>
+          </div>
+          <p class="benefit-item-desc">
+            Enjoy priority booking for new classes and exclusive events.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       11. MASTER FOOTER
+       ========================================================================== -->
+  <footer class="master-sports-footer" id="contact">
+    <div class="container">
+      <!-- Top Brand Row -->
+      <div class="footer-brand-banner">
+        <a href="index.html" class="logo-wrapper">
+          <img src="asset/image/stackly_.webp" alt="Stackly Logo" class="logo-img">
+        </a>
+        <div class="footer-slogan">MORE THAN A PLACE TO PRACTICE AND PLAY.</div>
+      </div>
+
+      <!-- 4 Columns Grid -->
+      <div class="master-footer-grid">
+        <!-- Col 1: Community -->
+        <div>
+          <h4 class="footer-col-title">Community</h4>
+          <p class="footer-col-desc">
+            Subscribe to receive registration perks, exclusive offers &amp; more!
+          </p>
+          <form class="footer-newsletter-form" onsubmit="event.preventDefault(); alert('Subscribed successfully!');">
+            <input type="email" placeholder="Enter email" required>
+            <button type="submit" aria-label="Submit newsletter">
+              <i class="fas fa-arrow-right"></i>
+            </button>
+          </form>
+        </div>
+
+        <!-- Col 2: Programs -->
+        <div>
+          <h4 class="footer-col-title">Quick Links</h4>
+          <ul class="footer-nav-list">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="rent.html">Rent</a></li>
+            <li><a href="ourteam.html">Our Team</a></li>
+            <li><a href="blog.html">Blog</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </div>
+
+        <!-- Col 3: Information -->
+        <div>
+          <h4 class="footer-col-title">Information</h4>
+          <ul class="footer-nav-list">
+            <li><a href="404.html">About</a></li>
+            <li><a href="404.html">Membership</a></li>
+            <li><a href="404.html">Jobs</a></li>
+            <li><a href="404.html">FAQ</a></li>
+            <li><a href="404.html">Contacts</a></li>
+            <li><a href="404.html">News + Press</a></li>
+            <li><a href="404.html">Sponsorships/Partnership</a></li>
+          </ul>
+        </div>
+
+        <!-- Col 4: Contacts -->
+        <div>
+          <h4 class="footer-col-title">Contacts</h4>
+          <ul class="footer-contacts-list">
+            <li><i class="fas fa-phone-alt"></i> +1 (123) 1800-567-8990</li>
+            <li><i class="fas fa-envelope"></i> contact@stacklyelite.com</li>
+            <li><i class="fas fa-map-marker-alt"></i> 2200 SW Cedar Hills Blvd, Portland, Oregon 97225</li>
+          </ul>
+          <a href="https://maps.google.com" target="_blank" class="program-action-link" style="margin-top: 15px;">
+            <span class="arrow-circle-lime"><i class="fas fa-arrow-right"></i></span>
+            <span>GET DIRECTIONS</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Sub Footer -->
+      <div class="master-sub-footer">
+        <div style="display: flex; align-items: center; flex-wrap: wrap;">
+          <span>&copy; 2026 STACKLY. All Rights Reserved.</span>
+          <div class="sub-footer-links">
+            <a href="404.html">Privacy</a>
+            <a href="404.html">Terms</a>
+            <a href="404.html">FAQs</a>
+          </div>
+        </div>
+
+        <div class="sub-footer-right">
+          <div class="social-icons-row">
+            <a href="404.html" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+            <a href="404.html" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="404.html" aria-label="X Twitter"><i class="fab fa-x-twitter"></i></a>
+            <a href="404.html" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+            <a href="404.html" aria-label="Slack"><i class="fab fa-slack"></i></a>
+          </div>
+          <button class="btn-schedules" onclick="alert('Opening class schedules timetable...');">
+            SCHEDULES
+          </button>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Video Showreel Modal -->
+  <div class="modal-overlay" id="videoModal">
+    <div class="modal-box" style="max-width: 800px; padding: 20px;">
+      <button class="modal-close-btn" id="closeVideoModal">&times;</button>
+      <h3 style="font-family: var(--font-heading); font-size: 20px; text-transform: uppercase; margin-bottom: 15px; color: #fff;">
+        <i class="fas fa-play-circle" style="color: var(--primary);"></i> Sports Highlights Showreel
+      </h3>
+      <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 6px;">
+        <iframe 
+          style="position: absolute; top:0; left: 0; width: 100%; height: 100%; border: 0;"
+          src="https://www.youtube-nocookie.com/embed/dQw4w9WgXcQ?autoplay=0" 
+          title="Sports Highlights" 
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+          allowfullscreen>
+        </iframe>
+      </div>
+    </div>
+  </div>
+
+  <!-- Theme JavaScript File -->
+  <script>
+  // Facility video pause/play toggle
+  var vid = document.getElementById('facilityVideo');
+  var toggleBtn = document.getElementById('facilityVideoToggle');
+  var vidIcon = document.getElementById('facilityVideoIcon');
+  if (toggleBtn && vid) {
+    toggleBtn.addEventListener('click', function () {
+      if (vid.paused) {
+        vid.play();
+        vidIcon.classList.replace('fa-play', 'fa-pause');
+      } else {
+        vid.pause();
+        vidIcon.classList.replace('fa-pause', 'fa-play');
+      }
+    });
+  }
+</script>
+<script src="asset/js/main.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  var go404 = function(e) { e.preventDefault(); window.location.href = '404.html'; };
+
+  // CTA button classes to intercept
+  var ctaBtnClasses = [
+    'btn-all-testimonials','btn-about-explore','btn-proud-enrol',
+    'btn-blog-member','btn-blog-benefits','btn-schedules',
+    'btn-learn-more','btn-cta','btn-join-member','btn-join-benefits',
+    'btn-join','btn-register','btn-book','btn-view','btn-enroll',
+    'btn-get-started','btn-try','btn-explore','btn-play','btn-watch',
+    'card-btn','hero-btn','program-btn','sport-btn','btn-clay-directions'
+  ];
+  ctaBtnClasses.forEach(function(cls) {
+    document.querySelectorAll('.' + cls).forEach(function(el) {
+      el.addEventListener('click', go404);
+    });
+  });
+
+  // <a> tags pointing to services.html or 404.html-redirects (catch any remaining)
+  document.querySelectorAll('a[href="services.html"]').forEach(function(a) {
+    a.href = '404.html';
+  });
+
+  // Any button without onclick/type=submit whose text matches CTA keywords
+  var keywords = ['LEARN MORE','JOIN NOW','GET STARTED','ALL TESTIMONIALS',
+    'EXPLORE','REGISTER','BOOK NOW','VIEW MORE','ENROLL','BECOME A MEMBER',
+    'MEMBERS BENEFITS','SCHEDULES','VIEW DETAILS','BUY NOW','ADD TO CART',
+    'SHOP NOW','DISCOVER','READ MORE','SEE MORE','VIEW ALL','ALL REVIEWS',
+    'ALL PROGRAMS','VIEW PROGRAM','GET TICKETS','APPLY NOW'];
+
+  document.querySelectorAll('button, a.btn, a[class*="btn-"]').forEach(function(el) {
+    var skipClasses = ['toggle-password','modal-close-btn','menu-toggle',
+      'nav-icon-btn','tilted-nav-btn','btn-auth','social-btn',
+      'btn-submit-contact','logout-btn','nav-link','btn-enquiry','btn-proud-enrol'];
+    var isSkip = skipClasses.some(function(s){ return el.classList.contains(s); });
+    var hasRealHref = el.tagName === 'A' && el.href &&
+      !el.href.endsWith('#') && !el.href.includes('services.html') &&
+      el.href.includes('.html') && !el.href.includes('404.html');
+    if (!isSkip && !hasRealHref) {
+      var txt = el.textContent.trim().toUpperCase();
+      if (keywords.some(function(k){ return txt.indexOf(k) !== -1; })) {
+        el.addEventListener('click', go404);
+      }
+    }
+  });
+  // PRELOADER
+  window.addEventListener('load', function() {
+    setTimeout(function() {
+      document.body.classList.add('preloader-hidden');
+    }, 1500); // 1.5s delay to let the animation show
+  });
+});
+</script>
+<script src="asset/js/scroll-animations.js"></script>
+</body>
+</html>
+

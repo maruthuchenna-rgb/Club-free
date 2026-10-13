@@ -1,0 +1,454 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Our Team | Stackly Sports Club</title>
+  <meta name="description" content="Meet the expert coaches at Stackly Sports Club for basketball, soccer, and swimming.">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/webp" href="asset/image/stackly_.webp">
+
+  <!-- FontAwesome 6 Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <!-- Theme Stylesheet -->
+  <link rel="stylesheet" href="asset/css/style.css">
+  <link rel="stylesheet" href="asset/css/scroll-animations.css">
+</head>
+<body>
+
+  <!-- ==========================================================================
+       1. HEADER & NAVIGATION
+       ========================================================================== -->
+  <header class="header-area">
+    <div class="nav-container">
+      <!-- Logo Branding -->
+      <a href="index.html" class="logo-wrapper">
+        <img src="asset/image/stackly_.webp" alt="Stackly Logo" class="logo-img">
+        
+      </a>
+
+      <!-- Navigation Menu -->
+      <nav class="nav-menu" id="navMenu">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="about.html" class="nav-link">About</a>
+        <a href="blog.html" class="nav-link">Blog</a>
+        <a href="rent.html" class="nav-link">Rent</a>
+        <a href="ourteam.html" class="nav-link active">Our Team</a>
+        <a href="contact.html" class="nav-link">Contact</a>
+        <a href="login.html" class="btn-enquiry mobile-only-enquiry">Enquiry</a>
+        </nav>
+
+      <!-- Nav Actions -->
+      <div class="nav-actions">
+        <button class="nav-icon-btn" id="openVideoModal" title="Watch Video">
+          <i class="fas fa-play-circle"></i>
+        </button>
+        <button class="nav-icon-btn" id="cartBtn" title="Cart">
+          <i class="fas fa-shopping-cart"></i>
+          <span class="cart-badge">0</span>
+        </button>
+        <a href="contact.html" class="btn-enquiry">
+          Enquiry
+        </a>
+        <button class="menu-toggle" id="menuToggle" aria-label="Toggle Menu">
+          <i class="fas fa-bars"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ==========================================================================
+       2. HERO SECTION
+       ========================================================================== -->
+  <section class="hero-slider-section" id="home">
+    <!-- Diagonal Dynamic Accent Lines -->
+    <div class="diagonal-accent-1"></div>
+    <div class="diagonal-accent-2"></div>
+    <div class="diagonal-accent-3"></div>
+
+    <div class="slider-container">
+      <!-- Services Hero Slide -->
+      <div class="hero-slide active">
+        <img src="asset/image/hero-services.webp" alt="Professional Sports Training Session" class="slide-bg">
+        <div class="slide-overlay"></div>
+        <div class="container">
+          <div class="slide-content-wrap">
+            <span class="slide-kicker">MEET THE TEAM</span>
+            <h1 class="slide-title">OUR EXPERT<br>COACHES</h1>
+            <p class="slide-desc">
+              From elite <strong>BASKETBALL</strong> and soccer training to world-class swimming instruction — meet the professionals dedicated to your game.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==========================================================================
+         BOTTOM 6-CATEGORY HERO STRIP
+         ========================================================================== -->
+    <div class="hero-bottom-strip">
+      <div class="strip-item">
+        <img src="asset/image/sport-cycling.webp" alt="Cycling" class="strip-bg">
+        <div class="strip-overlay"></div>
+        <div class="strip-content">
+          <i class="fas fa-bicycle strip-icon"></i>
+          <span class="strip-title">CYCLING</span>
+        </div>
+      </div>
+      <div class="strip-item">
+        <img src="asset/image/sport-golf.webp" alt="Golf" class="strip-bg">
+        <div class="strip-overlay"></div>
+        <div class="strip-content">
+          <i class="fas fa-golf-ball strip-icon"></i>
+          <span class="strip-title">GOLF</span>
+        </div>
+      </div>
+      <div class="strip-item">
+        <img src="asset/image/sport-swimming.webp" alt="Swimming" class="strip-bg">
+        <div class="strip-overlay"></div>
+        <div class="strip-content">
+          <i class="fas fa-swimmer strip-icon"></i>
+          <span class="strip-title">SWIMMING</span>
+        </div>
+      </div>
+      <div class="strip-item">
+        <img src="asset/image/sport-tennis.webp" alt="Tennis" class="strip-bg">
+        <div class="strip-overlay"></div>
+        <div class="strip-content">
+          <i class="fas fa-table-tennis strip-icon"></i>
+          <span class="strip-title">TENNIS</span>
+        </div>
+      </div>
+      <div class="strip-item">
+        <img src="asset/image/sport-track.webp" alt="Track Training" class="strip-bg">
+        <div class="strip-overlay"></div>
+        <div class="strip-content">
+          <i class="fas fa-running strip-icon"></i>
+          <span class="strip-title">TRACK TRAINING</span>
+        </div>
+      </div>
+      <div class="strip-item">
+        <img src="asset/image/sport-weight.webp" alt="Weight Training" class="strip-bg">
+        <div class="strip-overlay"></div>
+        <div class="strip-content">
+          <i class="fas fa-dumbbell strip-icon"></i>
+          <span class="strip-title">WEIGHT TRAINING</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       OUR TEAM PAGE — COACHES GRID
+       ========================================================================== -->
+  <section class="team-section">
+    <div class="container">
+      
+      <!-- Basketball Coaches -->
+      <div class="team-category">
+        <h2>BASKETBALL COACHES</h2>
+        <div class="team-grid">
+          <div class="team-member">
+            <div class="team-member-img"><img src="asset/image/team-bball-1.webp" alt="John Smith"></div>
+            <div class="team-member-name">JOHN SMITH</div>
+            <div class="team-member-title">Director of Coaching</div>
+          </div>
+          <div class="team-member">
+            <div class="team-member-img"><img src="asset/image/team-bball-2.webp" alt="Carlos Sanchez"></div>
+            <div class="team-member-name">CARLOS SANCHEZ</div>
+            <div class="team-member-title">Head Coach</div>
+          </div>
+          <div class="team-member">
+            <div class="team-member-img"><img src="asset/image/team-bball-3.webp" alt="Rebeca Holl"></div>
+            <div class="team-member-name">REBECA HOLL</div>
+            <div class="team-member-title">Coach</div>
+          </div>
+          <div class="team-member">
+            <div class="team-member-img"><img src="asset/image/team-bball-4.webp" alt="Samantha Smith"></div>
+            <div class="team-member-name">SAMANTHA SMITH</div>
+            <div class="team-member-title">Coach</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Soccer Coaches -->
+      <div class="team-category">
+        <h2>SOCCER COACHES</h2>
+        <div class="team-grid">
+          <div class="team-member">
+            <div class="team-member-img"><img src="asset/image/team-soccer-1.webp" alt="Dan Brilla"></div>
+            <div class="team-member-name">DAN BRILLA</div>
+            <div class="team-member-title">Director of Coaching</div>
+          </div>
+          <div class="team-member">
+            <div class="team-member-img"><img src="asset/image/team-soccer-2.webp" alt="Garrett Lou"></div>
+            <div class="team-member-name">GARRETT LOU</div>
+            <div class="team-member-title">Head Coach</div>
+          </div>
+          <div class="team-member">
+            <div class="team-member-img"><img src="asset/image/team-soccer-3.webp" alt="Matt Martines"></div>
+            <div class="team-member-name">MATT MARTINES</div>
+            <div class="team-member-title">Coach</div>
+          </div>
+          <div class="team-member">
+            <div class="team-member-img"><img src="asset/image/team-soccer-4.webp" alt="Robert Wolf"></div>
+            <div class="team-member-name">ROBERT WOLF</div>
+            <div class="team-member-title">Coach</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Swimming Coaches -->
+      <div class="team-category" style="margin-bottom: 0;">
+        <h2>SWIMMING COACHES</h2>
+        <div class="team-grid">
+          <div class="team-member">
+            <div class="team-member-img"><img src="asset/image/team-swim-1.webp" alt="Josh Belcher"></div>
+            <div class="team-member-name">JOSH BELCHER</div>
+            <div class="team-member-title">Director of Coaching</div>
+          </div>
+          <div class="team-member">
+            <div class="team-member-img"><img src="asset/image/team-swim-2.webp" alt="Matthew Hogan"></div>
+            <div class="team-member-name">MATTHEW HOGAN</div>
+            <div class="team-member-title">Head Coach</div>
+          </div>
+          <div class="team-member">
+            <div class="team-member-img"><img src="asset/image/team-swim-3.webp" alt="Chelsea Karolak"></div>
+            <div class="team-member-name">CHELSEA KAROLAK</div>
+            <div class="team-member-title">Coach</div>
+          </div>
+          <div class="team-member">
+            <div class="team-member-img"><img src="asset/image/team-swim-4.webp" alt="Steven Rosen"></div>
+            <div class="team-member-name">STEVEN ROSEN</div>
+            <div class="team-member-title">Coach</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       JOIN COMMUNITY BANNER
+       ========================================================================== -->
+  <section class="blog-join-strip">
+    <div class="container">
+      <div class="blog-join-inner">
+        <h2 class="blog-join-title">JOIN OUR COMMUNITY</h2>
+        <div class="blog-join-btns">
+          <button class="btn-blog-member">BECOME A MEMBER</button>
+          <button class="btn-blog-benefits">MEMBERS BENEFITS</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       BENEFITS CHECKPOINTS
+       ========================================================================== -->
+  <section class="blog-benefits-section">
+    <div class="container">
+      <div class="blog-benefits-grid">
+        
+        <!-- Benefit 1 -->
+        <div class="blog-benefit-item">
+          <div class="blog-benefit-header">
+            <span class="blog-check-circle"><i class="fas fa-check"></i></span>
+            <h3 class="blog-benefit-title">UNLIMITED ACCESS</h3>
+          </div>
+          <p class="blog-benefit-desc">
+            Full access to gym, pool, group classes, and specialized zones.
+          </p>
+        </div>
+
+        <!-- Benefit 2 -->
+        <div class="blog-benefit-item">
+          <div class="blog-benefit-header">
+            <span class="blog-check-circle"><i class="fas fa-check"></i></span>
+            <h3 class="blog-benefit-title">DISCOUNTS</h3>
+          </div>
+          <p class="blog-benefit-desc">
+            Special rates for tournaments, workshops, spa services, and personal training.
+          </p>
+        </div>
+
+        <!-- Benefit 3 -->
+        <div class="blog-benefit-item">
+          <div class="blog-benefit-header">
+            <span class="blog-check-circle"><i class="fas fa-check"></i></span>
+            <h3 class="blog-benefit-title">FREE CONSULTATIONS</h3>
+          </div>
+          <p class="blog-benefit-desc">
+            Personalized sessions with trainers, nutritionists, or physiotherapists.
+          </p>
+        </div>
+
+        <!-- Benefit 4 -->
+        <div class="blog-benefit-item">
+          <div class="blog-benefit-header">
+            <span class="blog-check-circle"><i class="fas fa-check"></i></span>
+            <h3 class="blog-benefit-title">PRIORITY BOOKING</h3>
+          </div>
+          <p class="blog-benefit-desc">
+            Enjoy priority booking for new classes and exclusive events.
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       MASTER FOOTER
+       ========================================================================== -->
+  <footer class="master-sports-footer" id="contact">
+    <div class="container">
+      <div class="footer-brand-banner">
+        <a href="index.html" class="logo-wrapper">
+          <img src="asset/image/stackly_.webp" alt="Stackly Logo" class="logo-img">
+        </a>
+        <div class="footer-slogan">MORE THAN A PLACE TO PRACTICE AND PLAY.</div>
+      </div>
+
+      <div class="master-footer-grid">
+        <div>
+          <h4 class="footer-col-title">Community</h4>
+          <p class="footer-col-desc">Subscribe to receive registration perks, exclusive offers &amp; more!</p>
+          <form class="footer-newsletter-form" onsubmit="event.preventDefault(); alert('Subscribed successfully!');">
+            <input type="email" placeholder="Enter email" required>
+            <button type="submit" aria-label="Submit newsletter"><i class="fas fa-arrow-right"></i></button>
+          </form>
+        </div>
+        <div>
+           <h4 class="footer-col-title">Quick Links</h4>
+          <ul class="footer-nav-list">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="rent.html">Rent</a></li>
+            <li><a href="ourteam.html">Our Team</a></li>
+            <li><a href="blog.html">Blog</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="footer-col-title">Information</h4>
+          <ul class="footer-nav-list">
+            <li><a href="404.html">About</a></li>
+            <li><a href="404.html">Membership</a></li>
+            <li><a href="404.html">Jobs</a></li>
+            <li><a href="404.html">FAQ</a></li>
+            <li><a href="404.html">Contacts</a></li>
+            <li><a href="404.html">News + Press</a></li>
+            <li><a href="404.html">Sponsorships/Partnership</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="footer-col-title">Contacts</h4>
+          <ul class="footer-contacts-list">
+            <li><i class="fas fa-phone-alt"></i> +1 (123) 1800-567-8990</li>
+            <li><i class="fas fa-envelope"></i> contact@stacklyelite.com</li>
+            <li><i class="fas fa-map-marker-alt"></i> 2200 SW Cedar Hills Blvd, Portland, Oregon 97225</li>
+          </ul>
+          <a href="https://maps.google.com" target="_blank" class="program-action-link" style="margin-top: 15px;">
+            <span class="arrow-circle-lime"><i class="fas fa-arrow-right"></i></span>
+            <span>GET DIRECTIONS</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="master-sub-footer">
+        <div style="display: flex; align-items: center; flex-wrap: wrap;">
+          <span>&copy; 2026 STACKLY. All Rights Reserved.</span>
+          <div class="sub-footer-links">
+            <a href="404.html">Privacy</a>
+            <a href="404.html">Terms</a>
+            <a href="404.html">FAQs</a>
+          </div>
+        </div>
+        <div class="sub-footer-right">
+          <div class="social-icons-row">
+            <a href="404.html" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+            <a href="404.html" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="404.html" aria-label="X Twitter"><i class="fab fa-x-twitter"></i></a>
+            <a href="404.html" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+            <a href="404.html" aria-label="Slack"><i class="fab fa-slack"></i></a>
+          </div>
+          <button class="btn-schedules" onclick="alert('Opening class schedules timetable...');">SCHEDULES</button>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Video Showreel Modal -->
+  <div class="modal-overlay" id="videoModal">
+    <div class="modal-box" style="max-width: 800px; padding: 20px;">
+      <button class="modal-close-btn" id="closeVideoModal">&times;</button>
+      <h3 style="font-family: var(--font-heading); font-size: 20px; text-transform: uppercase; margin-bottom: 15px; color: #fff;">
+        <i class="fas fa-play-circle" style="color: var(--primary);"></i> Sports Highlights Showreel
+      </h3>
+      <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 6px;">
+        <iframe style="position: absolute; top:0; left: 0; width: 100%; height: 100%; border: 0;"
+          src="https://www.youtube-nocookie.com/embed/dQw4w9WgXcQ?autoplay=0"
+          title="Sports Highlights"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen></iframe>
+      </div>
+    </div>
+  </div>
+
+  <!-- Theme JavaScript File -->
+  <script src="asset/js/main.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  var go404 = function(e) { e.preventDefault(); window.location.href = '404.html'; };
+
+  // CTA button classes to intercept
+  var ctaBtnClasses = [
+    'btn-all-testimonials','btn-about-explore','btn-proud-enrol',
+    'btn-blog-member','btn-blog-benefits','btn-schedules',
+    'btn-learn-more','btn-cta','btn-join-member','btn-join-benefits',
+    'btn-join','btn-register','btn-book','btn-view','btn-enroll',
+    'btn-get-started','btn-try','btn-explore','btn-play','btn-watch',
+    'card-btn','hero-btn','program-btn','sport-btn','btn-clay-directions'
+  ];
+  ctaBtnClasses.forEach(function(cls) {
+    document.querySelectorAll('.' + cls).forEach(function(el) {
+      el.addEventListener('click', go404);
+    });
+  });
+
+  // <a> tags pointing to services.html or 404.html-redirects (catch any remaining)
+  document.querySelectorAll('a[href="services.html"]').forEach(function(a) {
+    a.href = '404.html';
+  });
+
+  // Any button without onclick/type=submit whose text matches CTA keywords
+  var keywords = ['LEARN MORE','JOIN NOW','GET STARTED','ALL TESTIMONIALS',
+    'EXPLORE','REGISTER','BOOK NOW','VIEW MORE','ENROLL','BECOME A MEMBER',
+    'MEMBERS BENEFITS','SCHEDULES','VIEW DETAILS','BUY NOW','ADD TO CART',
+    'SHOP NOW','DISCOVER','READ MORE','SEE MORE','VIEW ALL','ALL REVIEWS',
+    'ALL PROGRAMS','VIEW PROGRAM','GET TICKETS','APPLY NOW'];
+
+  document.querySelectorAll('button, a.btn, a[class*="btn-"]').forEach(function(el) {
+    var skipClasses = ['toggle-password','modal-close-btn','menu-toggle',
+      'nav-icon-btn','tilted-nav-btn','btn-auth','social-btn',
+      'btn-submit-contact','logout-btn','nav-link','btn-enquiry','btn-proud-enrol'];
+    var isSkip = skipClasses.some(function(s){ return el.classList.contains(s); });
+    var hasRealHref = el.tagName === 'A' && el.href &&
+      !el.href.endsWith('#') && !el.href.includes('services.html') &&
+      el.href.includes('.html') && !el.href.includes('404.html');
+    if (!isSkip && !hasRealHref) {
+      var txt = el.textContent.trim().toUpperCase();
+      if (keywords.some(function(k){ return txt.indexOf(k) !== -1; })) {
+        el.addEventListener('click', go404);
+      }
+    }
+  });
+});
+</script>
+<script src="asset/js/scroll-animations.js"></script>
+</body>
+</html>
+

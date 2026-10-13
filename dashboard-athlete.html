@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Athlete Dashboard | Stackly</title>
+  <link rel="icon" type="image/webp" href="asset/image/stackly_.webp">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --forest: #0f2518;
+      --forest-mid: #18332b;
+      --lime: #bbf779;
+      --lime-dark: #7ec832;
+      --dark: #0a1a08;
+      --white: #ffffff;
+      --gray: #9ca3af;
+      --light-bg: #f5f6f2;
+      --border: #e5e7eb;
+    }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--light-bg);
+      display: flex;
+      height: 100vh;
+      overflow: hidden;
+    }
+    /* Sidebar */
+    .sidebar {
+      width: 280px;
+      background: var(--forest);
+      color: var(--white);
+      display: flex;
+      flex-direction: column;
+      flex-shrink: 0;
+    }
+    .sidebar-header {
+      padding: 24px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+       filter: brightness(0) saturate(100%)
+            invert(87%) sepia(29%) saturate(1000%)
+            hue-rotate(42deg) brightness(105%) contrast(95%);
+    }
+    .sidebar-header img {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      border: 2px solid var(--lime);
+      background: #fff;
+    }
+    .sidebar-header h2 {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 24px;
+      font-weight: 800;
+      letter-spacing: 1px;
+    }
+    .sidebar-header h2 span { color: var(--lime); }
+    
+    .user-profile {
+      padding: 20px 24px;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .user-avatar {
+      width: 46px;
+      height: 46px;
+      background: var(--lime);
+      color: var(--forest);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      font-weight: 600;
+    }
+    .user-info {
+      overflow: hidden;
+    }
+    .user-name {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 18px;
+      font-weight: 700;
+      color: #fff;
+      text-transform: uppercase;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .user-email {
+      font-size: 12px;
+      color: #c8d8c8;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .user-role-badge {
+      display: inline-block;
+      background: rgba(187, 247, 121, 0.2);
+      color: var(--lime);
+      font-size: 10px;
+      padding: 2px 6px;
+      border-radius: 4px;
+      text-transform: uppercase;
+      font-weight: 600;
+      margin-top: 4px;
+    }
+
+    .nav-menu {
+      padding: 20px 0;
+      flex: 1;
+    }
+    .nav-item {
+      padding: 14px 24px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      color: #c8d8c8;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      font-weight: 500;
+    }
+    .nav-item:hover {
+      background: rgba(255,255,255,0.05);
+      color: #fff;
+    }
+    .nav-item.active {
+      background: var(--lime);
+      color: var(--forest);
+      font-weight: 600;
+      border-left: 4px solid var(--forest-mid);
+    }
+    .nav-item i { width: 20px; text-align: center; font-size: 18px; }
+    
+    .sidebar-footer {
+      padding: 20px 24px;
+      border-top: 1px solid rgba(255,255,255,0.1);
+    }
+    .logout-btn {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: #ff6b6b;
+      text-decoration: none;
+      font-weight: 600;
+      transition: color 0.2s;
+    }
+    .logout-btn:hover { color: #ff8787; }
+
+    /* Main Content */
+    .main-content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+    .topbar {
+      height: 70px;
+      background: var(--white);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      padding: 0 30px;
+      justify-content: space-between;
+    }
+    .page-title {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--forest);
+      text-transform: uppercase;
+    }
+    
+    .content-area {
+      flex: 1;
+      padding: 30px;
+      overflow-y: auto;
+    }
+    
+    /* Sections */
+    .dashboard-section {
+      display: none;
+      animation: fadeIn 0.3s ease;
+    }
+    .dashboard-section.active { display: block; }
+    
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Cards & Layout */
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 24px; }
+    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-bottom: 24px; }
+    
+    .card {
+      background: var(--white);
+      border-radius: 12px;
+      padding: 24px;
+      border: 1px solid var(--border);
+      box-shadow: 0 2px 10px rgba(0,0,0,0.02);
+    }
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+    }
+    .card-title {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--forest);
+      text-transform: uppercase;
+    }
+    
+    /* Stats */
+    .stat-value {
+      font-size: 32px;
+      font-weight: 700;
+      color: var(--forest);
+      margin-bottom: 4px;
+    }
+    .stat-label { font-size: 13px; color: var(--gray); font-weight: 500; }
+    
+    /* Image Box */
+    .image-box {
+      width: 100%;
+      height: 200px;
+      border-radius: 8px;
+      overflow: hidden;
+      margin-bottom: 16px;
+    }
+    .image-box img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .mobile-menu-btn { display: none; }
+    .sidebar-overlay { display: none; }
+    @media (max-width: 900px) {
+      body { 
+        flex-direction: column !important; 
+        height: auto !important; 
+        min-height: 100vh !important;
+        overflow-x: hidden;
+        overflow-y: auto !important;
+      }
+      .mobile-menu-btn { display: block !important; }
+      .sidebar { 
+        position: fixed !important;
+        left: -100% !important;
+        top: 0;
+        bottom: 0;
+        width: 280px !important;
+        height: 100vh !important;
+        z-index: 1000;
+        transition: left 0.3s ease;
+      }
+      .sidebar.open { left: 0 !important; }
+      .sidebar-overlay.active {
+        display: block;
+        position: fixed;
+        top: 0; left: 0; right: 0; bottom: 0;
+        background: rgba(0,0,0,0.5);
+        z-index: 999;
+      }
+      .main-content { 
+        padding: 15px !important; 
+        overflow: visible !important; 
+        width: 100% !important;
+      }
+      .grid-2, .grid-3 { 
+        grid-template-columns: 1fr !important; 
+        gap: 15px !important;
+      }
+      .sidebar-header img { width: 80px !important; }
+      div[style*="display:flex;"] { flex-wrap: wrap !important; }
+      section#messages > div > div { flex-direction: column !important; }
+      section#messages > div > div > div[style*="width:30%"], 
+      section#messages > div > div > div[style*="width:70%"] { 
+        width: 100% !important; 
+        border-right: none !important; 
+        padding: 10px !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+  <aside class="sidebar">
+    <a href="index.html" class="sidebar-header" style="justify-content: center; padding: 24px 0;">
+      <img src="asset/image/stackly_.webp" alt="Logo" style="width: 120px; height: auto; border: none; background: transparent; border-radius: 0;">
+    </a>
+    
+    <div class="user-profile">
+      <div class="user-avatar" id="userInitial">A</div>
+      <div class="user-info">
+        <div class="user-name" id="userName">Athlete Name</div>
+        <div class="user-email" id="userEmail">athlete@example.com</div>
+        <div class="user-role-badge">Athlete</div>
+      </div>
+    </div>
+
+    <nav class="nav-menu">
+      <div class="nav-item active" data-target="overview">
+        <i class="fas fa-chart-line"></i> Performance
+      </div>
+      <div class="nav-item" data-target="schedule">
+        <i class="fas fa-calendar-alt"></i> My Schedule
+      </div>
+      <div class="nav-item" data-target="training">
+        <i class="fas fa-dumbbell"></i> Training Plan
+      </div>
+      <div class="nav-item" data-target="messages">
+        <i class="fas fa-envelope"></i> Messages
+      </div>
+      <div class="nav-item" data-target="settings">
+        <i class="fas fa-cog"></i> Settings
+      </div>
+    </nav>
+    
+    <div class="sidebar-footer">
+      <a href="login.html" class="logout-btn" onclick="localStorage.removeItem('stacklyUser')">
+        <i class="fas fa-sign-out-alt"></i> Logout
+      </a>
+    </div>
+  </aside>
+
+  <main class="main-content">
+    <header class="topbar">
+      <div style="display:flex; align-items:center; gap: 15px;">
+        <button id="mobileMenuBtn" class="mobile-menu-btn" style="background:none; border:none; font-size:24px; color:var(--forest); cursor:pointer;">
+          <i class="fas fa-bars"></i>
+        </button>
+        <div class="page-title" id="pageTitle">Performance Overview</div>
+      </div>
+    </header>
+    
+    <div class="content-area">
+      <!-- 1. Overview -->
+      <section id="overview" class="dashboard-section active">
+        <div class="grid-3">
+          <div class="card">
+            <div class="stat-value">12</div>
+            <div class="stat-label">Matches Played</div>
+            <div style="margin-top:10px; font-size:12px; color:var(--lime-dark);"><i class="fas fa-arrow-up"></i> +2 this month</div>
+          </div>
+          <div class="card">
+            <div class="stat-value">8</div>
+            <div class="stat-label">Wins</div>
+            <div style="margin-top:10px; font-size:12px; color:var(--lime-dark);"><i class="fas fa-arrow-up"></i> 66% Win Rate</div>
+          </div>
+          <div class="card">
+            <div class="stat-value">85%</div>
+            <div class="stat-label">Fitness Score</div>
+            <div style="background:var(--light-bg); height:6px; border-radius:3px; margin-top:10px;">
+               <div style="background:var(--lime-dark); width:85%; height:100%; border-radius:3px;"></div>
+            </div>
+          </div>
+        </div>
+        <div class="grid-2">
+          <div class="card">
+            <div class="card-header"><h3 class="card-title">Recent Highlight</h3></div>
+            <div class="image-box">
+              <img src="asset/image/sport-swimming.webp" alt="Highlight">
+            </div>
+            <p>Your performance in the last swimming relay was exceptional, setting a new personal best time of 1m 54s!</p>
+           <a href="404.html" ><button style="margin-top: 15px; padding: 8px 16px; background: var(--forest); color: var(--lime); border: none; border-radius: 4px; cursor: pointer;">View Full Replay</button></a>
+          </div>
+          <div class="card">
+            <div class="card-header"><h3 class="card-title">Coach Notes</h3></div>
+            <div style="background: #f9fafb; padding: 15px; border-left: 4px solid var(--lime-dark); margin-bottom: 15px; border-radius: 4px;">
+              <strong>Coach Sarah (Today)</strong>
+              <p style="margin-top: 5px; font-size: 14px;">"Great stamina shown during the final quarter. Keep focusing on your breathing techniques."</p>
+            </div>
+            <div style="background: #f9fafb; padding: 15px; border-left: 4px solid var(--lime-dark); border-radius: 4px;">
+              <strong>Coach Mike (Yesterday)</strong>
+              <p style="margin-top: 5px; font-size: 14px;">"Excellent recovery speed. Your sprint intervals are showing massive improvement."</p>
+            </div>
+          </div>
+        </div>
+        <div class="grid-2">
+          <div class="card">
+            <div class="card-header"><h3 class="card-title">Upcoming Goals</h3></div>
+            <ul style="list-style:none; display:flex; flex-direction:column; gap:10px;">
+              <li style="padding:10px; background:#f9fafb; border-radius:6px; display:flex; justify-content:space-between; align-items:center;">
+                <span><i class="fas fa-check-circle" style="color:var(--lime-dark); margin-right:8px;"></i> Run 5km under 20 mins</span>
+                <span style="color:var(--gray); font-size:12px;">Completed</span>
+              </li>
+              <li style="padding:10px; border:1px dashed var(--border); border-radius:6px; display:flex; justify-content:space-between; align-items:center;">
+                <span><i class="far fa-circle" style="color:var(--gray); margin-right:8px;"></i> Master flip turn technique</span>
+                <span style="color:var(--forest); font-size:12px; font-weight:bold;">In Progress</span>
+              </li>
+              <li style="padding:10px; border:1px dashed var(--border); border-radius:6px; display:flex; justify-content:space-between; align-items:center;">
+                <span><i class="far fa-circle" style="color:var(--gray); margin-right:8px;"></i> Increase squat 1RM to 100kg</span>
+                <span style="color:var(--forest); font-size:12px; font-weight:bold;">Pending</span>
+              </li>
+            </ul>
+          </div>
+          <div class="card">
+            <div class="card-header"><h3 class="card-title">Health Stats</h3></div>
+            <div style="display:flex; flex-direction:column; gap:15px; margin-top:10px;">
+              <div style="display:flex; justify-content:space-between; align-items:center;">
+                <span><i class="fas fa-bed" style="color:#3b82f6; width:20px;"></i> Sleep</span>
+                <strong>7h 45m</strong>
+              </div>
+              <div style="display:flex; justify-content:space-between; align-items:center;">
+                <span><i class="fas fa-tint" style="color:#0ea5e9; width:20px;"></i> Hydration</span>
+                <strong>2.5L / 3L</strong>
+              </div>
+              <div style="display:flex; justify-content:space-between; align-items:center;">
+                <span><i class="fas fa-apple-alt" style="color:#ef4444; width:20px;"></i> Calories</span>
+                <strong>2400 / 2800 kcal</strong>
+              </div>
+              <div style="display:flex; justify-content:space-between; align-items:center;">
+                <span><i class="fas fa-heartbeat" style="color:#f43f5e; width:20px;"></i> Resting HR</span>
+                <strong>52 bpm</strong>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 2. Schedule -->
+      <section id="schedule" class="dashboard-section">
+        <div class="grid-2">
+          <div class="card">
+            <div class="card-header"><h3 class="card-title">Upcoming Events</h3></div>
+            <div style="display:flex; flex-direction:column; gap:15px;">
+              <div style="display:flex; gap:15px; align-items:center; border-bottom:1px solid var(--border); padding-bottom:15px;">
+                <div style="background:var(--forest); color:white; padding:10px; border-radius:8px; text-align:center; min-width:60px;">
+                  <div style="font-size:12px; text-transform:uppercase;">Oct</div>
+                  <div style="font-size:20px; font-weight:bold; color:var(--lime);">12</div>
+                </div>
+                <div>
+                  <h4 style="margin-bottom:5px;">Regional Qualifiers</h4>
+                  <p style="font-size:13px; color:var(--gray);"><i class="fas fa-map-marker-alt"></i> Main Stadium, North Wing</p>
+                </div>
+              </div>
+              <div style="display:flex; gap:15px; align-items:center; border-bottom:1px solid var(--border); padding-bottom:15px;">
+                <div style="background:var(--forest); color:white; padding:10px; border-radius:8px; text-align:center; min-width:60px;">
+                  <div style="font-size:12px; text-transform:uppercase;">Oct</div>
+                  <div style="font-size:20px; font-weight:bold; color:var(--lime);">15</div>
+                </div>
+                <div>
+                  <h4 style="margin-bottom:5px;">Team Practice & Scrimmage</h4>
+                  <p style="font-size:13px; color:var(--gray);"><i class="fas fa-map-marker-alt"></i> Indoor Fieldhouse</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-header"><h3 class="card-title">Event Photos</h3></div>
+            <div class="image-box" style="height: 250px;">
+              <img src="asset/image/team-swim-1.webp" alt="Schedule">
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 3. Training Plan -->
+      <section id="training" class="dashboard-section">
+        <div class="grid-2">
+          <div class="card">
+            <div class="card-header"><h3 class="card-title">Current Regimen (Week 4)</h3></div>
+            <p style="font-weight:600; margin-bottom:15px;">Focus: Core Strength & Agility</p>
+            
+            <div style="margin-bottom: 15px;">
+              <div style="display:flex; justify-content:space-between; margin-bottom:5px;">
+                <span style="font-size:14px; font-weight:500;">Weekly Progress</span>
+                <span style="font-size:14px; font-weight:600; color:var(--forest);">60%</span>
+              </div>
+              <div style="background:var(--light-bg); height:8px; border-radius:4px;">
+                 <div style="background:var(--lime-dark); width:60%; height:100%; border-radius:4px;"></div>
+              </div>
+            </div>
+
+            <ul style="list-style:none; display:flex; flex-direction:column; gap:10px;">
+              <li style="padding:10px; background:#f9fafb; border-radius:6px; display:flex; justify-content:space-between;">
+                <span><i class="fas fa-check-circle" style="color:var(--lime-dark); margin-right:8px;"></i> Morning: 5km run</span>
+                <span style="color:var(--gray); font-size:12px;">Completed</span>
+              </li>
+              <li style="padding:10px; background:#f9fafb; border-radius:6px; display:flex; justify-content:space-between;">
+                <span><i class="fas fa-check-circle" style="color:var(--lime-dark); margin-right:8px;"></i> Afternoon: Stretching</span>
+                <span style="color:var(--gray); font-size:12px;">Completed</span>
+              </li>
+              <li style="padding:10px; border:1px dashed var(--border); border-radius:6px; display:flex; justify-content:space-between;">
+                <span><i class="far fa-circle" style="color:var(--gray); margin-right:8px;"></i> Evening: Weights (Upper Body)</span>
+                <span style="color:var(--lime-dark); font-size:12px; font-weight:bold;">Pending</span>
+              </li>
+            </ul>
+          </div>
+          <div class="card">
+            <div class="image-box" style="height: 100%;">
+              <img src="asset/image/program-fitness.webp" alt="Fitness">
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 4. Messages -->
+      <section id="messages" class="dashboard-section">
+        <div class="card" style="padding:0; overflow:hidden;">
+          <div class="card-header" style="padding:20px; border-bottom:1px solid var(--border); margin-bottom:0;"><h3 class="card-title">Inbox</h3></div>
+          <div style="display:flex;">
+            <div style="width:30%; border-right:1px solid var(--border);">
+              <div style="padding:15px; border-bottom:1px solid var(--border); background:#f9fafb; cursor:pointer;">
+                <strong style="display:block;">Coach Sarah</strong>
+                <span style="font-size:12px; color:var(--gray);">Re: Practice Schedule...</span>
+              </div>
+              <div style="padding:15px; border-bottom:1px solid var(--border); cursor:pointer;">
+                <strong style="display:block;">Team Captain</strong>
+                <span style="font-size:12px; color:var(--gray);">Game on Saturday!</span>
+              </div>
+            </div>
+            <div style="width:70%; padding:20px;">
+              <h4 style="margin-bottom:10px;">Re: Practice Schedule Updates</h4>
+              <p style="font-size:14px; color:var(--gray); margin-bottom:20px;">From: Coach Sarah &lt;sarah@stackly.com&gt;</p>
+              <p style="font-size:14px; line-height:1.6;">Hi team,<br><br>Just a quick reminder that tomorrow's practice has been moved to the indoor fieldhouse due to incoming rain. Please bring your indoor turf shoes.<br><br>See you there!</p>
+              <div style="margin-top:20px; display:flex; gap:10px;">
+                <input type="text" placeholder="Reply..." style="flex:1; padding:10px; border:1px solid var(--border); border-radius:4px;">
+                <button style="padding:10px 20px; background:var(--forest); color:var(--lime); border:none; border-radius:4px; cursor:pointer;"><i class="fas fa-paper-plane"></i></button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 5. Settings -->
+      <section id="settings" class="dashboard-section">
+        <div class="grid-2">
+          <div class="card">
+            <div class="card-header"><h3 class="card-title">Profile Settings</h3></div>
+            <form style="display:flex; flex-direction:column; gap:15px;">
+              <div>
+                <label style="display:block; font-size:12px; font-weight:600; margin-bottom:5px; text-transform:uppercase;">Full Name</label>
+                <input type="text" value="Athlete Name" style="width:100%; padding:10px; border:1px solid var(--border); border-radius:4px; font-family:'Inter';">
+              </div>
+              <div>
+                <label style="display:block; font-size:12px; font-weight:600; margin-bottom:5px; text-transform:uppercase;">Email Address</label>
+                <input type="email" value="athlete@example.com" style="width:100%; padding:10px; border:1px solid var(--border); border-radius:4px; font-family:'Inter';">
+              </div>
+              <div>
+                <label style="display:block; font-size:12px; font-weight:600; margin-bottom:5px; text-transform:uppercase;">Jersey Number</label>
+                <input type="text" value="10" style="width:100%; padding:10px; border:1px solid var(--border); border-radius:4px; font-family:'Inter';">
+              </div>
+             <a href="404.html"><button type="button" style="padding:12px; background:var(--forest); color:var(--lime); border:none; border-radius:4px; font-weight:bold; cursor:pointer;">Save Changes</button></a>
+            </form>
+          </div>
+          <div class="card">
+             <div class="card-header"><h3 class="card-title">Notifications</h3></div>
+             <div style="display:flex; justify-content:space-between; padding:15px 0; border-bottom:1px solid var(--border);">
+               <span>Email Alerts</span>
+               <input type="checkbox" checked style="accent-color:var(--lime-dark);">
+             </div>
+             <div style="display:flex; justify-content:space-between; padding:15px 0; border-bottom:1px solid var(--border);">
+               <span>SMS Reminders</span>
+               <input type="checkbox" style="accent-color:var(--lime-dark);">
+             </div>
+             <div style="display:flex; justify-content:space-between; padding:15px 0;">
+               <span>Coach Feedback Alerts</span>
+               <input type="checkbox" checked style="accent-color:var(--lime-dark);">
+             </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <script>
+    // Load User Data
+    const userData = JSON.parse(localStorage.getItem('stacklyUser'));
+    if (userData) {
+      document.getElementById('userName').textContent = userData.name;
+      document.getElementById('userEmail').textContent = userData.email;
+      document.getElementById('userInitial').textContent = userData.name.charAt(0).toUpperCase();
+    } else {
+      // Fallback
+      document.getElementById('userName').textContent = "Guest Athlete";
+      document.getElementById('userEmail').textContent = "guest@example.com";
+    }
+
+    // Tab Switching
+    const navItems = document.querySelectorAll('.nav-item');
+    const sections = document.querySelectorAll('.dashboard-section');
+    const pageTitle = document.getElementById('pageTitle');
+
+    navItems.forEach(item => {
+      item.addEventListener('click', () => {
+        // Remove active class
+        navItems.forEach(n => n.classList.remove('active'));
+        sections.forEach(s => s.classList.remove('active'));
+        
+        // Add active class
+        item.classList.add('active');
+        const targetId = item.getAttribute('data-target');
+        document.getElementById(targetId).classList.add('active');
+        
+        // Update Title
+        pageTitle.textContent = item.textContent.trim();
+
+        // Close sidebar on mobile after clicking a link
+        if (window.innerWidth <= 900) {
+          document.querySelector('.sidebar').classList.remove('open');
+          document.getElementById('sidebarOverlay').classList.remove('active');
+        }
+      });
+    });
+
+    // Mobile Menu Toggle
+    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+    const sidebar = document.querySelector('.sidebar');
+    const sidebarOverlay = document.getElementById('sidebarOverlay');
+
+    mobileMenuBtn.addEventListener('click', () => {
+      sidebar.classList.add('open');
+      sidebarOverlay.classList.add('active');
+    });
+
+    sidebarOverlay.addEventListener('click', () => {
+      sidebar.classList.remove('open');
+      sidebarOverlay.classList.remove('active');
+    });
+  </script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  var go404 = function(e) { e.preventDefault(); window.location.href = '404.html'; };
+
+  // CTA button classes to intercept
+  var ctaBtnClasses = [
+    'btn-all-testimonials','btn-about-explore','btn-proud-enrol',
+    'btn-blog-member','btn-blog-benefits','btn-schedules',
+    'btn-learn-more','btn-cta','btn-join-member','btn-join-benefits',
+    'btn-join','btn-register','btn-book','btn-view','btn-enroll',
+    'btn-get-started','btn-try','btn-explore','btn-play','btn-watch',
+    'card-btn','hero-btn','program-btn','sport-btn','btn-clay-directions'
+  ];
+  ctaBtnClasses.forEach(function(cls) {
+    document.querySelectorAll('.' + cls).forEach(function(el) {
+      el.addEventListener('click', go404);
+    });
+  });
+
+  // <a> tags pointing to services.html or 404.html-redirects (catch any remaining)
+  document.querySelectorAll('a[href="services.html"]').forEach(function(a) {
+    a.href = '404.html';
+  });
+
+  // Any button without onclick/type=submit whose text matches CTA keywords
+  var keywords = ['LEARN MORE','JOIN NOW','GET STARTED','ALL TESTIMONIALS',
+    'EXPLORE','REGISTER','BOOK NOW','VIEW MORE','ENROLL','BECOME A MEMBER',
+    'MEMBERS BENEFITS','SCHEDULES','VIEW DETAILS','BUY NOW','ADD TO CART',
+    'SHOP NOW','DISCOVER','READ MORE','SEE MORE','VIEW ALL','ALL REVIEWS',
+    'ALL PROGRAMS','VIEW PROGRAM','GET TICKETS','APPLY NOW'];
+
+  document.querySelectorAll('button, a.btn, a[class*="btn-"]').forEach(function(el) {
+    var skipClasses = ['toggle-password','modal-close-btn','menu-toggle',
+      'nav-icon-btn','tilted-nav-btn','btn-auth','social-btn',
+      'btn-submit-contact','logout-btn','nav-link','btn-enquiry','btn-proud-enrol'];
+    var isSkip = skipClasses.some(function(s){ return el.classList.contains(s); });
+    var hasRealHref = el.tagName === 'A' && el.href &&
+      !el.href.endsWith('#') && !el.href.includes('services.html') &&
+      el.href.includes('.html') && !el.href.includes('404.html');
+    if (!isSkip && !hasRealHref) {
+      var txt = el.textContent.trim().toUpperCase();
+      if (keywords.some(function(k){ return txt.indexOf(k) !== -1; })) {
+        el.addEventListener('click', go404);
+      }
+    }
+  });
+});
+</script>
+</body>
+</html>

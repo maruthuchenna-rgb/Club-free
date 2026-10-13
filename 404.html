@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Page Not Found | Stackly Sports Club</title>
+  <link rel="icon" type="image/webp" href="asset/image/stackly_.webp">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    
+    :root {
+      --forest: #0f2518;
+      --lime: #bbf779;
+      --lime-dark: #7ec832;
+      --white: #ffffff;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: var(--forest);
+      background-image: url('asset/image/404-bg.webp');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(15, 37, 24, 0.95) 0%, rgba(15, 37, 24, 0.75) 100%);
+      z-index: 1;
+    }
+
+    .container {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      padding: 40px;
+      color: var(--white);
+      max-width: 600px;
+    }
+
+    .logo-container {
+      margin-bottom: 30px;
+      animation: float 4s ease-in-out infinite;
+    }
+
+    .logo-container img {
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
+      border: 2px solid var(--lime);
+      background: #fff;
+      padding: 4px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    }
+
+    .error-code {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 150px;
+      font-weight: 800;
+      line-height: 1;
+      color: transparent;
+      -webkit-text-stroke: 2px var(--lime);
+      position: relative;
+      display: inline-block;
+    }
+
+    /* Glitch Effect */
+    .error-code::before,
+    .error-code::after {
+      content: '404';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      color: var(--lime);
+      -webkit-text-stroke: 0px;
+      opacity: 0.8;
+    }
+
+    .error-code::before {
+      left: 3px;
+      text-shadow: -2px 0 #ff3b3b;
+      clip: rect(24px, 550px, 90px, 0);
+      animation: glitch-anim-2 3s infinite linear alternate-reverse;
+    }
+
+    .error-code::after {
+      left: -3px;
+      text-shadow: -2px 0 #3b82f6;
+      clip: rect(85px, 550px, 140px, 0);
+      animation: glitch-anim 2.5s infinite linear alternate-reverse;
+    }
+
+    .title {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 36px;
+      font-weight: 700;
+      margin-top: 10px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      animation: fadeInUp 0.8s ease backwards;
+      animation-delay: 0.2s;
+    }
+
+    .description {
+      font-size: 16px;
+      color: #c8d8c8;
+      margin-top: 15px;
+      margin-bottom: 35px;
+      line-height: 1.6;
+      animation: fadeInUp 0.8s ease backwards;
+      animation-delay: 0.4s;
+    }
+
+    .btn-home {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 16px 32px;
+      background: var(--lime);
+      color: var(--forest);
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 18px;
+      font-weight: 800;
+      text-transform: uppercase;
+      text-decoration: none;
+      letter-spacing: 1px;
+      border-radius: 8px;
+      transition: all 0.3s ease;
+      animation: fadeInUp 0.8s ease backwards;
+      animation-delay: 0.6s;
+    }
+
+    .btn-home:hover {
+      background: #fff;
+      transform: translateY(-3px);
+      box-shadow: 0 10px 20px rgba(187, 247, 121, 0.3);
+    }
+
+    .btn-home i {
+      font-size: 16px;
+      transition: transform 0.3s ease;
+    }
+
+    .btn-home:hover i {
+      transform: translateX(-4px);
+    }
+
+    /* Animations */
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-15px); }
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes glitch-anim {
+      0% { clip: rect(65px, 9999px, 100px, 0); }
+      5% { clip: rect(52px, 9999px, 74px, 0); }
+      10% { clip: rect(79px, 9999px, 106px, 0); }
+      15% { clip: rect(75px, 9999px, 131px, 0); }
+      20% { clip: rect(62px, 9999px, 73px, 0); }
+      25% { clip: rect(100px, 9999px, 86px, 0); }
+      30% { clip: rect(4px, 9999px, 15px, 0); }
+      35% { clip: rect(7px, 9999px, 20px, 0); }
+      40% { clip: rect(122px, 9999px, 97px, 0); }
+      45% { clip: rect(76px, 9999px, 11px, 0); }
+      50% { clip: rect(89px, 9999px, 66px, 0); }
+      55% { clip: rect(31px, 9999px, 85px, 0); }
+      60% { clip: rect(145px, 9999px, 129px, 0); }
+      65% { clip: rect(30px, 9999px, 143px, 0); }
+      70% { clip: rect(21px, 9999px, 5px, 0); }
+      75% { clip: rect(6px, 9999px, 145px, 0); }
+      80% { clip: rect(125px, 9999px, 150px, 0); }
+      85% { clip: rect(56px, 9999px, 91px, 0); }
+      90% { clip: rect(110px, 9999px, 46px, 0); }
+      95% { clip: rect(48px, 9999px, 115px, 0); }
+      100% { clip: rect(114px, 9999px, 18px, 0); }
+    }
+
+    @keyframes glitch-anim-2 {
+      0% { clip: rect(118px, 9999px, 100px, 0); }
+      5% { clip: rect(98px, 9999px, 75px, 0); }
+      10% { clip: rect(68px, 9999px, 66px, 0); }
+      15% { clip: rect(98px, 9999px, 78px, 0); }
+      20% { clip: rect(28px, 9999px, 110px, 0); }
+      25% { clip: rect(91px, 9999px, 147px, 0); }
+      30% { clip: rect(45px, 9999px, 16px, 0); }
+      35% { clip: rect(78px, 9999px, 63px, 0); }
+      40% { clip: rect(60px, 9999px, 123px, 0); }
+      45% { clip: rect(1px, 9999px, 99px, 0); }
+      50% { clip: rect(115px, 9999px, 6px, 0); }
+      55% { clip: rect(144px, 9999px, 20px, 0); }
+      60% { clip: rect(32px, 9999px, 140px, 0); }
+      65% { clip: rect(44px, 9999px, 67px, 0); }
+      70% { clip: rect(68px, 9999px, 120px, 0); }
+      75% { clip: rect(72px, 9999px, 5px, 0); }
+      80% { clip: rect(51px, 9999px, 144px, 0); }
+      85% { clip: rect(126px, 9999px, 137px, 0); }
+      90% { clip: rect(1px, 9999px, 35px, 0); }
+      95% { clip: rect(113px, 9999px, 108px, 0); }
+      100% { clip: rect(57px, 9999px, 117px, 0); }
+    }
+
+  </style>
+</head>
+<body>
+  
+  <div class="overlay"></div>
+
+  <div class="container">
+    <div class="logo-container">
+     
+    </div>
+    
+    <div class="error-code">404</div>
+    <div class="title">Out of Bounds</div>
+    <div class="description">
+      It looks like you've strayed off the field! The page you are looking for has been moved, deleted, or never existed in our playbook.
+    </div>
+    
+    <div style="display: flex; gap: 16px; flex-wrap: wrap; justify-content: center;">
+      <a href="index.html" class="btn-home">
+        <i class="fas fa-arrow-left"></i> Return to Homepage
+      </a>
+      <button onclick="history.back()" class="btn-home" style="background: transparent; border: 2px solid var(--lime); color: var(--lime);">
+        <i class="fas fa-undo"></i> Go Back
+      </button>
+    </div>
+  </div>
+
+</body>
+</html>
